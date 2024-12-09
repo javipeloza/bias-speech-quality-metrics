@@ -1,0 +1,15 @@
+Language: portuguese
+Average PESQ score: 1.190
+Processed 18 files
+Skipped 0 files
+
+Language: polish
+Average PESQ score: 1.060
+Processed 18 files
+Skipped 0 files
+
+Language: spanish
+Average PESQ score: 1.156
+Processed 11 files
+Skipped 0 files
+

@@ -1,0 +1,332 @@
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+Noise Level 1.00: 1.036
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+Noise Level 1.00: 1.026
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.644
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.644
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.392
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.282
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+Noise Level 0.25: 1.211
+Noise Level 0.50: 1.067
+Noise Level 0.75: 1.070
+Noise Level 1.00: 1.070
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+Noise Level 0.25: 1.032
+Noise Level 0.50: 1.046
+Noise Level 0.75: 1.048
+Noise Level 1.00: 1.048
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+Noise Level 0.25: 4.620
+Noise Level 0.50: 1.537
+Noise Level 0.75: 1.070
+Noise Level 1.00: 1.036
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+Noise Level 0.25: 4.606
+Noise Level 0.50: 1.327
+Noise Level 0.75: 1.042
+Noise Level 1.00: 1.026
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+Noise Level 0.25: 1.211
+Noise Level 0.50: 1.211
+Noise Level 0.75: 1.211
+Noise Level 1.00: 1.211
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+Noise Level 0.25: 1.032
+Noise Level 0.50: 1.032
+Noise Level 0.75: 1.032
+Noise Level 1.00: 1.032
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+Noise Level 0.25: 4.643
+Noise Level 0.50: 4.643
+Noise Level 0.75: 4.643
+Noise Level 1.00: 4.643
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+Noise Level 0.25: 4.643
+Noise Level 0.50: 4.643
+Noise Level 0.75: 4.643
+Noise Level 1.00: 4.643
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+Noise Level 0.25: 4.643
+Noise Level 0.50: 4.643
+Noise Level 0.75: 1.211
+Noise Level 1.00: 1.211
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+Noise Level 0.25: 4.643
+Noise Level 0.50: 4.643
+Noise Level 0.75: 1.032
+Noise Level 1.00: 1.032
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+Noise Level 0.25: 4.643
+Noise Level 0.50: 4.643
+Noise Level 0.75: 4.636
+Noise Level 1.00: 4.636
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+Noise Level 0.25: 4.643
+Noise Level 0.50: 4.643
+Noise Level 0.75: 4.637
+Noise Level 1.00: 4.637
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+Noise Level 0.25: 4.636
+Noise Level 0.50: 4.636
+Noise Level 0.75: 4.636
+Noise Level 1.00: 4.636
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+Noise Level 0.25: 4.637
+Noise Level 0.50: 4.637
+Noise Level 0.75: 4.637
+Noise Level 1.00: 4.637
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+Noise Level 0.25: 4.636
+Noise Level 0.50: 3.947
+Noise Level 0.75: 2.760
+Noise Level 1.00: 1.950
+
+Metric: PESQ
+Processed 1 files
+Skipped 0 files
+
+Noise Level Results:
+Noise Level 0.00: 4.643
+Noise Level 0.25: 4.637
+Noise Level 0.50: 3.788
+Noise Level 0.75: 2.373
+Noise Level 1.00: 1.626
+
