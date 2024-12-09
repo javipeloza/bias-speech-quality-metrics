@@ -1,33 +1,42 @@
 import os
 import numpy as np
 from scipy.io import wavfile
-from pesq import pesq
-from scipy.signal import resample
-from converter import AudioConverter
-from degrade import create_degraded_audio
-
-class MetricStrategy:
-    def calculate_score(self, ref, deg):
-        raise NotImplementedError("Must implement calculate_score method")
-
-class PESQStrategy(MetricStrategy):
-    def calculate_score(self, ref, deg):
-        return pesq(16000, ref, deg, 'wb')
-    
-class ViSQOLStrategy(MetricStrategy):
-    def calculate_score(self, ref, deg):
-        return pesq(16000, ref, deg, 'wb')
-
 
 class AudioQualityAnalyzer:
-    def __init__(self, language, ref_dir, deg_dir, metric_strategy):
+    def __init__(self, language, ref_dir, deg_dir):
         self.language = language
         self.ref_dir = ref_dir
         self.deg_dir = deg_dir
-        self.metric_strategy = metric_strategy
-        self.noise_levels = np.linspace(0, 1, 5)  # More granular: 0 to 1 in ~0.05 steps
-        self.results = {}  # Dictionary to store results per file and noise level
+        self.degradation_levels = np.linspace(0, 1, 101)
+        
+        # New results structure:
+        # {
+        #     'file1.wav': {
+        #         'noise': {  # degradation type
+        #             0.0: {  # degradation level
+        #                 'PESQ': 4.5,
+        #                 'ViSQOL': 4.2
+        #             },
+        #             0.25: {...}
+        #         },
+        #         'echo': {...}
+        #     },
+        #     'file2.wav': {...}
+        # }
+        self.results = {}
         self.skipped_files = []
+        
+        # Lists to store available metrics and degradation types
+        self.metrics = []
+        self.degradation_types = []
+
+    def add_metric(self, metric_strategy):
+        """Add a new metric strategy"""
+        self.metrics.append(metric_strategy)
+
+    def add_degradation_type(self, degradation_type):
+        """Add a new degradation type"""
+        self.degradation_types.append(degradation_type)
 
     def analyze(self):
         for file_name in os.listdir(self.ref_dir):
@@ -42,52 +51,85 @@ class AudioQualityAnalyzer:
                 # Read reference file once
                 _, ref = wavfile.read(ref_path)
                 
-                # Test each noise level
-                for noise_level in self.noise_levels:
-                    print(f'  Testing noise level: {noise_level:.2f}')
-                    deg_path = os.path.join(self.deg_dir, f'temp_{noise_level}_{file_name}')
+                # Test each degradation type
+                for deg_type in self.degradation_types:
+                    print(f'Testing degradation type: {deg_type.name}')
+                    self.results[file_name][deg_type.name] = {}
                     
-                    try:
-                        # Create degraded version for this noise level
-                        create_degraded_audio(ref_path, deg_path, noise_level=noise_level)
-                        _, deg = wavfile.read(deg_path)
+                    # Test each degradation level
+                    for level in self.degradation_levels:
+                        print(f'  Testing level: {level:.2f}')
+                        deg_path = os.path.join(
+                            self.deg_dir, 
+                            f'temp_{deg_type.name}_{level}_{file_name}'
+                        )
                         
-                        # Calculate score
-                        score = self.metric_strategy.calculate_score(ref, deg)
-                        self.results[file_name][noise_level] = score
-                        print(f'    Score: {score:.3f}')
-                        
-                        # Clean up temporary degraded file
-                        # os.remove(deg_path)
-                        
-                    except Exception as e:
-                        print(f"Error at noise level {noise_level}: {str(e)}")
-                        self.results[file_name][noise_level] = None
+                        try:
+                            # Apply degradation
+                            deg_type.apply_degradation(ref_path, deg_path, level)
+                            _, deg = wavfile.read(deg_path)
+                            
+                            # Calculate scores for all metrics
+                            self.results[file_name][deg_type.name][level] = {}
+                            for metric in self.metrics:
+                                score = metric.calculate_score(ref, deg)
+                                self.results[file_name][deg_type.name][level][metric.name] = score
+                                print(f'    {metric.name} Score: {score:.3f}')
+                            
+                            # Clean up temporary degraded file
+                            # os.remove(deg_path)
+                            
+                        except Exception as e:
+                            print(f"Error at {deg_type.name} level {level}: {str(e)}")
+                            self.results[file_name][deg_type.name][level] = None
 
             except Exception as e:
                 print(f"Skipping file {file_name}: {str(e)}")
                 self.skipped_files.append(file_name)
                 continue
 
-    def get_results_by_file(self, file_name):
-        """Get all noise levels and scores for a specific file"""
-        if file_name in self.results:
-            noise_levels = sorted(self.results[file_name].keys())
-            scores = [self.results[file_name][level] for level in noise_levels]
-            return noise_levels, scores
-        return None, None
+    def get_results_by_file(self, file_name, degradation_type=None, metric_name=None):
+        """
+        Get results for a specific file, optionally filtered by degradation type and metric
+        Returns: (levels, scores)
+        """
+        if file_name not in self.results:
+            return None, None
+            
+        if degradation_type is None:
+            return self.results[file_name]
+            
+        if degradation_type not in self.results[file_name]:
+            return None, None
+            
+        if metric_name is None:
+            return self.results[file_name][degradation_type]
+            
+        levels = sorted(self.results[file_name][degradation_type].keys())
+        scores = [
+            self.results[file_name][degradation_type][level][metric_name] 
+            for level in levels
+            if level in self.results[file_name][degradation_type] 
+            and self.results[file_name][degradation_type][level] is not None
+            and metric_name in self.results[file_name][degradation_type][level]
+        ]
+        return levels, scores
 
-    def get_average_scores_by_noise_level(self):
-        """Get average scores across all files for each noise level"""
+    def get_average_scores(self, degradation_type, metric_name):
+        """Get average scores across all files for a specific degradation type and metric"""
         avg_scores = {}
-        for noise_level in self.noise_levels:
-            scores = [
-                results[noise_level]
-                for results in self.results.values()
-                if noise_level in results and results[noise_level] is not None
-            ]
+        for level in self.degradation_levels:
+            scores = []
+            for file_results in self.results.values():
+                if (degradation_type in file_results and 
+                    level in file_results[degradation_type] and 
+                    file_results[degradation_type][level] is not None and
+                    metric_name in file_results[degradation_type][level]):
+                    scores.append(file_results[degradation_type][level][metric_name])
+            
             if scores:
-                avg_scores[noise_level] = np.mean(scores)
+                avg_scores[level] = np.mean(scores)
+                
         return sorted(avg_scores.keys()), [avg_scores[k] for k in sorted(avg_scores.keys())]
 
     def get_processed_count(self):

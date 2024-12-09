@@ -1,332 +1,779 @@
-Metric: PESQ
+
+Analysis Results for Turkish
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.643
-Noise Level 1.00: 1.036
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+Level 0.01: 4.641
+Level 0.02: 4.641
+Level 0.03: 4.641
+Level 0.04: 4.641
+Level 0.05: 4.641
+Level 0.06: 4.641
+Level 0.07: 4.641
+Level 0.08: 4.641
+Level 0.09: 4.641
+Level 0.10: 4.641
+Level 0.11: 4.641
+Level 0.12: 4.641
+Level 0.13: 4.641
+Level 0.14: 4.641
+Level 0.15: 4.641
+Level 0.16: 4.641
+Level 0.17: 4.641
+Level 0.18: 4.641
+Level 0.19: 4.641
+Level 0.20: 4.641
+Level 0.21: 4.641
+Level 0.22: 4.641
+Level 0.23: 4.638
+Level 0.24: 4.633
+Level 0.25: 4.618
+Level 0.26: 4.590
+Level 0.27: 4.531
+Level 0.28: 4.423
+Level 0.29: 4.275
+Level 0.30: 4.108
+Level 0.31: 3.940
+Level 0.32: 3.775
+Level 0.33: 3.625
+Level 0.34: 3.470
+Level 0.35: 3.304
+Level 0.36: 3.140
+Level 0.37: 2.962
+Level 0.38: 2.788
+Level 0.39: 2.639
+Level 0.40: 2.463
+Level 0.41: 2.326
+Level 0.42: 2.202
+Level 0.43: 2.079
+Level 0.44: 1.985
+Level 0.45: 1.892
+Level 0.46: 1.796
+Level 0.47: 1.724
+Level 0.48: 1.647
+Level 0.49: 1.592
+Level 0.50: 1.528
+Level 0.51: 1.483
+Level 0.52: 1.437
+Level 0.53: 1.392
+Level 0.54: 1.348
+Level 0.55: 1.313
+Level 0.56: 1.287
+Level 0.57: 1.256
+Level 0.58: 1.230
+Level 0.59: 1.204
+Level 0.60: 1.185
+Level 0.61: 1.171
+Level 0.62: 1.155
+Level 0.63: 1.146
+Level 0.64: 1.138
+Level 0.65: 1.128
+Level 0.66: 1.121
+Level 0.67: 1.111
+Level 0.68: 1.105
+Level 0.69: 1.098
+Level 0.70: 1.093
+Level 0.71: 1.088
+Level 0.72: 1.081
+Level 0.73: 1.077
+Level 0.74: 1.073
+Level 0.75: 1.069
+Level 0.76: 1.067
+Level 0.77: 1.064
+Level 0.78: 1.061
+Level 0.79: 1.060
+Level 0.80: 1.057
+Level 0.81: 1.056
+Level 0.82: 1.054
+Level 0.83: 1.052
+Level 0.84: 1.051
+Level 0.85: 1.049
+Level 0.86: 1.048
+Level 0.87: 1.046
+Level 0.88: 1.045
+Level 0.89: 1.044
+Level 0.90: 1.044
+Level 0.91: 1.042
+Level 0.92: 1.042
+Level 0.93: 1.041
+Level 0.94: 1.040
+Level 0.95: 1.040
+Level 0.96: 1.039
+Level 0.97: 1.038
+Level 0.98: 1.037
+Level 0.99: 1.037
+Level 1.00: 1.036
+
+
+Analysis Results for English
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.643
-Noise Level 1.00: 1.026
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+Level 0.01: 4.639
+Level 0.02: 4.638
+Level 0.03: 4.638
+Level 0.04: 4.638
+Level 0.05: 4.638
+Level 0.06: 4.638
+Level 0.07: 4.638
+Level 0.08: 4.638
+Level 0.09: 4.639
+Level 0.10: 4.638
+Level 0.11: 4.639
+Level 0.12: 4.638
+Level 0.13: 4.638
+Level 0.14: 4.639
+Level 0.15: 4.639
+Level 0.16: 4.638
+Level 0.17: 4.639
+Level 0.18: 4.639
+Level 0.19: 4.638
+Level 0.20: 4.638
+Level 0.21: 4.638
+Level 0.22: 4.638
+Level 0.23: 4.633
+Level 0.24: 4.624
+Level 0.25: 4.606
+Level 0.26: 4.560
+Level 0.27: 4.468
+Level 0.28: 4.332
+Level 0.29: 4.102
+Level 0.30: 3.886
+Level 0.31: 3.696
+Level 0.32: 3.520
+Level 0.33: 3.336
+Level 0.34: 3.134
+Level 0.35: 2.927
+Level 0.36: 2.721
+Level 0.37: 2.540
+Level 0.38: 2.364
+Level 0.39: 2.215
+Level 0.40: 2.085
+Level 0.41: 1.968
+Level 0.42: 1.864
+Level 0.43: 1.766
+Level 0.44: 1.677
+Level 0.45: 1.600
+Level 0.46: 1.529
+Level 0.47: 1.463
+Level 0.48: 1.415
+Level 0.49: 1.366
+Level 0.50: 1.328
+Level 0.51: 1.289
+Level 0.52: 1.255
+Level 0.53: 1.230
+Level 0.54: 1.205
+Level 0.55: 1.182
+Level 0.56: 1.159
+Level 0.57: 1.147
+Level 0.58: 1.133
+Level 0.59: 1.122
+Level 0.60: 1.113
+Level 0.61: 1.102
+Level 0.62: 1.093
+Level 0.63: 1.084
+Level 0.64: 1.079
+Level 0.65: 1.072
+Level 0.66: 1.068
+Level 0.67: 1.063
+Level 0.68: 1.059
+Level 0.69: 1.056
+Level 0.70: 1.052
+Level 0.71: 1.051
+Level 0.72: 1.048
+Level 0.73: 1.046
+Level 0.74: 1.043
+Level 0.75: 1.042
+Level 0.76: 1.040
+Level 0.77: 1.038
+Level 0.78: 1.037
+Level 0.79: 1.036
+Level 0.80: 1.035
+Level 0.81: 1.034
+Level 0.82: 1.033
+Level 0.83: 1.032
+Level 0.84: 1.032
+Level 0.85: 1.031
+Level 0.86: 1.031
+Level 0.87: 1.030
+Level 0.88: 1.030
+Level 0.89: 1.029
+Level 0.90: 1.029
+Level 0.91: 1.028
+Level 0.92: 1.028
+Level 0.93: 1.028
+Level 0.94: 1.028
+Level 0.95: 1.027
+Level 0.96: 1.027
+Level 0.97: 1.027
+Level 0.98: 1.026
+Level 0.99: 1.027
+Level 1.00: 1.026
+
+
+Analysis Results for Turkish
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.643
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+
+
+Analysis Results for English
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.643
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+
+
+Analysis Results for Turkish
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.643
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+Level 1.00: 1.036
+
+
+Analysis Results for English
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.643
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+Level 1.00: 1.026
+
+
+Analysis Results for Turkish
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.643
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+Level 1.00: 1.036
+
+
+Analysis Results for English
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.643
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+Level 1.00: 1.028
+
+
+Analysis Results for Turkish
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.644
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+Level 1.00: 1.045
+
+
+Analysis Results for English
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.644
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+Level 1.00: 1.028
+
+
+Analysis Results for Turkish
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.643
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+Level 0.25: 1.043
+Level 0.50: 1.028
+Level 0.75: 1.038
+Level 1.00: 1.026
+
+
+Analysis Results for English
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.643
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+Level 0.25: 1.028
+Level 0.50: 1.031
+Level 0.75: 1.051
+Level 1.00: 1.029
+
+
+Analysis Results for Turkish
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.643
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+Level 0.25: 1.040
+Level 0.50: 1.038
+Level 0.75: 1.034
+Level 1.00: 1.041
+
+
+Analysis Results for English
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.643
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+Level 0.25: 1.029
+Level 0.50: 1.029
+Level 0.75: 1.123
+Level 1.00: 1.028
+
+
+Analysis Results for Turkish
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.643
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+Level 0.25: 1.025
+Level 0.50: 1.031
+Level 0.75: 1.044
+Level 1.00: 1.034
+
+
+Analysis Results for English
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.643
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+Level 0.25: 1.028
+Level 0.50: 1.028
+Level 0.75: 1.098
+Level 1.00: 1.030
+
+
+Analysis Results for Turkish
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.392
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+Level 0.25: 1.035
+Level 0.50: 1.040
+Level 0.75: 1.026
+Level 1.00: 1.039
+
+
+Analysis Results for English
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.282
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+Level 0.25: 1.027
+Level 0.50: 1.070
+Level 0.75: 1.037
+Level 1.00: 1.033
+
+
+Analysis Results for Turkish
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.643
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+Level 0.25: 1.026
+Level 0.50: 1.037
+Level 0.75: 1.223
+Level 1.00: 1.051
+
+
+Analysis Results for English
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.643
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+Level 0.25: 1.028
+Level 0.50: 1.028
+Level 0.75: 1.042
+Level 1.00: 1.028
+
+
+Analysis Results for Turkish
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.643
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+Level 0.25: 1.028
+Level 0.50: 1.025
+Level 0.75: 1.034
+Level 1.00: 1.039
+
+
+Analysis Results for English
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.643
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+Level 0.25: 1.028
+Level 0.50: 1.028
+Level 0.75: 1.029
+Level 1.00: 1.028
+
+
+Analysis Results for Turkish
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.643
-Noise Level 0.25: 1.211
-Noise Level 0.50: 1.067
-Noise Level 0.75: 1.070
-Noise Level 1.00: 1.070
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+
+
+Analysis Results for Turkish
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.643
-Noise Level 0.25: 1.032
-Noise Level 0.50: 1.046
-Noise Level 0.75: 1.048
-Noise Level 1.00: 1.048
 
-Metric: PESQ
+Degradation Type: noise
+------------------------------
+
+PESQ Results:
+Level 0.00: 4.643
+Level 0.01: 4.641
+Level 0.02: 4.641
+Level 0.03: 4.641
+Level 0.04: 4.641
+Level 0.05: 4.641
+Level 0.06: 4.641
+Level 0.07: 4.641
+Level 0.08: 4.640
+Level 0.09: 4.641
+Level 0.10: 4.640
+Level 0.11: 4.641
+Level 0.12: 4.641
+Level 0.13: 4.641
+Level 0.14: 4.641
+Level 0.15: 4.641
+Level 0.16: 4.641
+Level 0.17: 4.641
+Level 0.18: 4.641
+Level 0.19: 4.641
+Level 0.20: 4.641
+Level 0.21: 4.641
+Level 0.22: 4.641
+Level 0.23: 4.641
+Level 0.24: 4.641
+Level 0.25: 4.641
+Level 0.26: 4.641
+Level 0.27: 4.640
+Level 0.28: 4.641
+Level 0.29: 4.641
+Level 0.30: 4.641
+Level 0.31: 4.641
+Level 0.32: 4.641
+Level 0.33: 4.641
+Level 0.34: 4.641
+Level 0.35: 4.641
+Level 0.36: 4.641
+Level 0.37: 4.641
+Level 0.38: 4.641
+Level 0.39: 4.641
+Level 0.40: 4.641
+Level 0.41: 4.641
+Level 0.42: 4.641
+Level 0.43: 4.641
+Level 0.44: 4.641
+Level 0.45: 4.641
+Level 0.46: 4.641
+Level 0.47: 4.641
+Level 0.48: 4.640
+Level 0.49: 4.641
+Level 0.50: 4.641
+Level 0.51: 4.641
+Level 0.52: 4.641
+Level 0.53: 4.641
+Level 0.54: 4.641
+Level 0.55: 4.641
+Level 0.56: 4.640
+Level 0.57: 4.639
+Level 0.58: 4.638
+Level 0.59: 4.636
+Level 0.60: 4.633
+Level 0.61: 4.629
+Level 0.62: 4.624
+Level 0.63: 4.615
+Level 0.64: 4.605
+Level 0.65: 4.592
+Level 0.66: 4.570
+Level 0.67: 4.547
+Level 0.68: 4.517
+Level 0.69: 4.480
+Level 0.70: 4.434
+Level 0.71: 4.368
+Level 0.72: 4.319
+Level 0.73: 4.229
+Level 0.74: 4.167
+Level 0.75: 4.102
+Level 0.76: 4.034
+Level 0.77: 3.973
+Level 0.78: 3.892
+Level 0.79: 3.843
+Level 0.80: 3.766
+Level 0.81: 3.716
+Level 0.82: 3.655
+Level 0.83: 3.589
+Level 0.84: 3.537
+Level 0.85: 3.468
+Level 0.86: 3.403
+Level 0.87: 3.346
+Level 0.88: 3.278
+Level 0.89: 3.200
+Level 0.90: 3.130
+Level 0.91: 3.064
+Level 0.92: 2.999
+Level 0.93: 2.928
+Level 0.94: 2.855
+Level 0.95: 2.793
+Level 0.96: 2.714
+Level 0.97: 2.652
+Level 0.98: 2.580
+Level 0.99: 2.530
+Level 1.00: 2.462
+
+
+Analysis Results for English
+==================================================
 Processed 1 files
 Skipped 0 files
 
-Noise Level Results:
-Noise Level 0.00: 4.643
-Noise Level 0.25: 4.620
-Noise Level 0.50: 1.537
-Noise Level 0.75: 1.070
-Noise Level 1.00: 1.036
 
-Metric: PESQ
-Processed 1 files
-Skipped 0 files
+Degradation Type: noise
+------------------------------
 
-Noise Level Results:
-Noise Level 0.00: 4.643
-Noise Level 0.25: 4.606
-Noise Level 0.50: 1.327
-Noise Level 0.75: 1.042
-Noise Level 1.00: 1.026
-
-Metric: PESQ
-Processed 1 files
-Skipped 0 files
-
-Noise Level Results:
-Noise Level 0.00: 4.643
-Noise Level 0.25: 1.211
-Noise Level 0.50: 1.211
-Noise Level 0.75: 1.211
-Noise Level 1.00: 1.211
-
-Metric: PESQ
-Processed 1 files
-Skipped 0 files
-
-Noise Level Results:
-Noise Level 0.00: 4.643
-Noise Level 0.25: 1.032
-Noise Level 0.50: 1.032
-Noise Level 0.75: 1.032
-Noise Level 1.00: 1.032
-
-Metric: PESQ
-Processed 1 files
-Skipped 0 files
-
-Noise Level Results:
-Noise Level 0.00: 4.643
-Noise Level 0.25: 4.643
-Noise Level 0.50: 4.643
-Noise Level 0.75: 4.643
-Noise Level 1.00: 4.643
-
-Metric: PESQ
-Processed 1 files
-Skipped 0 files
-
-Noise Level Results:
-Noise Level 0.00: 4.643
-Noise Level 0.25: 4.643
-Noise Level 0.50: 4.643
-Noise Level 0.75: 4.643
-Noise Level 1.00: 4.643
-
-Metric: PESQ
-Processed 1 files
-Skipped 0 files
-
-Noise Level Results:
-Noise Level 0.00: 4.643
-Noise Level 0.25: 4.643
-Noise Level 0.50: 4.643
-Noise Level 0.75: 1.211
-Noise Level 1.00: 1.211
-
-Metric: PESQ
-Processed 1 files
-Skipped 0 files
-
-Noise Level Results:
-Noise Level 0.00: 4.643
-Noise Level 0.25: 4.643
-Noise Level 0.50: 4.643
-Noise Level 0.75: 1.032
-Noise Level 1.00: 1.032
-
-Metric: PESQ
-Processed 1 files
-Skipped 0 files
-
-Noise Level Results:
-Noise Level 0.00: 4.643
-Noise Level 0.25: 4.643
-Noise Level 0.50: 4.643
-Noise Level 0.75: 4.636
-Noise Level 1.00: 4.636
-
-Metric: PESQ
-Processed 1 files
-Skipped 0 files
-
-Noise Level Results:
-Noise Level 0.00: 4.643
-Noise Level 0.25: 4.643
-Noise Level 0.50: 4.643
-Noise Level 0.75: 4.637
-Noise Level 1.00: 4.637
-
-Metric: PESQ
-Processed 1 files
-Skipped 0 files
-
-Noise Level Results:
-Noise Level 0.00: 4.643
-Noise Level 0.25: 4.636
-Noise Level 0.50: 4.636
-Noise Level 0.75: 4.636
-Noise Level 1.00: 4.636
-
-Metric: PESQ
-Processed 1 files
-Skipped 0 files
-
-Noise Level Results:
-Noise Level 0.00: 4.643
-Noise Level 0.25: 4.637
-Noise Level 0.50: 4.637
-Noise Level 0.75: 4.637
-Noise Level 1.00: 4.637
-
-Metric: PESQ
-Processed 1 files
-Skipped 0 files
-
-Noise Level Results:
-Noise Level 0.00: 4.643
-Noise Level 0.25: 4.636
-Noise Level 0.50: 3.947
-Noise Level 0.75: 2.760
-Noise Level 1.00: 1.950
-
-Metric: PESQ
-Processed 1 files
-Skipped 0 files
-
-Noise Level Results:
-Noise Level 0.00: 4.643
-Noise Level 0.25: 4.637
-Noise Level 0.50: 3.788
-Noise Level 0.75: 2.373
-Noise Level 1.00: 1.626
+PESQ Results:
+Level 0.00: 4.643
+Level 0.01: 4.638
+Level 0.02: 4.639
+Level 0.03: 4.638
+Level 0.04: 4.638
+Level 0.05: 4.638
+Level 0.06: 4.638
+Level 0.07: 4.638
+Level 0.08: 4.639
+Level 0.09: 4.638
+Level 0.10: 4.639
+Level 0.11: 4.638
+Level 0.12: 4.639
+Level 0.13: 4.638
+Level 0.14: 4.639
+Level 0.15: 4.638
+Level 0.16: 4.638
+Level 0.17: 4.638
+Level 0.18: 4.638
+Level 0.19: 4.638
+Level 0.20: 4.639
+Level 0.21: 4.638
+Level 0.22: 4.638
+Level 0.23: 4.639
+Level 0.24: 4.638
+Level 0.25: 4.638
+Level 0.26: 4.638
+Level 0.27: 4.638
+Level 0.28: 4.638
+Level 0.29: 4.638
+Level 0.30: 4.638
+Level 0.31: 4.638
+Level 0.32: 4.638
+Level 0.33: 4.638
+Level 0.34: 4.638
+Level 0.35: 4.638
+Level 0.36: 4.638
+Level 0.37: 4.639
+Level 0.38: 4.639
+Level 0.39: 4.638
+Level 0.40: 4.639
+Level 0.41: 4.639
+Level 0.42: 4.638
+Level 0.43: 4.638
+Level 0.44: 4.638
+Level 0.45: 4.639
+Level 0.46: 4.638
+Level 0.47: 4.638
+Level 0.48: 4.638
+Level 0.49: 4.638
+Level 0.50: 4.638
+Level 0.51: 4.638
+Level 0.52: 4.638
+Level 0.53: 4.639
+Level 0.54: 4.639
+Level 0.55: 4.638
+Level 0.56: 4.637
+Level 0.57: 4.634
+Level 0.58: 4.633
+Level 0.59: 4.630
+Level 0.60: 4.626
+Level 0.61: 4.619
+Level 0.62: 4.613
+Level 0.63: 4.600
+Level 0.64: 4.587
+Level 0.65: 4.561
+Level 0.66: 4.532
+Level 0.67: 4.501
+Level 0.68: 4.456
+Level 0.69: 4.397
+Level 0.70: 4.325
+Level 0.71: 4.260
+Level 0.72: 4.173
+Level 0.73: 4.075
+Level 0.74: 3.976
+Level 0.75: 3.889
+Level 0.76: 3.811
+Level 0.77: 3.735
+Level 0.78: 3.661
+Level 0.79: 3.589
+Level 0.80: 3.524
+Level 0.81: 3.450
+Level 0.82: 3.378
+Level 0.83: 3.314
+Level 0.84: 3.215
+Level 0.85: 3.137
+Level 0.86: 3.048
+Level 0.87: 2.962
+Level 0.88: 2.888
+Level 0.89: 2.805
+Level 0.90: 2.724
+Level 0.91: 2.648
+Level 0.92: 2.572
+Level 0.93: 2.508
+Level 0.94: 2.431
+Level 0.95: 2.369
+Level 0.96: 2.300
+Level 0.97: 2.242
+Level 0.98: 2.189
+Level 0.99: 2.142
+Level 1.00: 2.088
 

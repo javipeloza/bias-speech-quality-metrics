@@ -1,2 +1,11 @@
 # Ignore the audio folder
-audio/
+/audio/
+
+# Ignore the results folder and its contents
+/results/**
+
+# Ignore the __pycache__ folder
+/__pycache__/
+
+# Ignore the .idea folder
+/.idea/
