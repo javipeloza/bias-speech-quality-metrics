@@ -1,4 +1,6 @@
-from analyzer import AudioQualityAnalyzer, PESQStrategy, ViSQOLStrategy
+from analyzer import AudioQualityAnalyzer
+from metrics import PESQStrategy, ViSQOLStrategy
+from degradation_types import NoiseType
 from results_logger import ResultsLogger
 
 if __name__ == '__main__':
@@ -14,17 +16,23 @@ if __name__ == '__main__':
         ref_dir = f"./audio/reference/{language}"
         deg_dir = f"./audio/degraded/{language}"
 
-        # Initialize analyzer for PESQ
-        pesq_analyzer = AudioQualityAnalyzer(language, ref_dir, deg_dir, PESQStrategy())
+        # Initialize analyzer
+        analyzer = AudioQualityAnalyzer(language, ref_dir, deg_dir)
+        
+        # Add metrics
+        analyzer.add_metric(PESQStrategy())
+        
+        # Add degradation types
+        analyzer.add_degradation_type(NoiseType())
+        # Add more degradation types as needed
         
         # Perform analysis
-        pesq_analyzer.analyze()
+        analyzer.analyze()
         
-        # Log individual results
-        logger.log_results(pesq_analyzer, metric_name='PESQ')
+        # Log results
+        logger.log_results(analyzer)
         
-        # Add analyzer to list for comparison plot
-        analyzers.append(pesq_analyzer)
+        analyzers.append(analyzer)
 
-    # Create comparative plot with all analyzers
+    # Create comparative plot
     logger.plot_results(analyzers)

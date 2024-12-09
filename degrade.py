@@ -28,7 +28,9 @@ def adjust_noise_volume(noise, noise_level):
     """
     # Convert noise_level to decibels (negative values to reduce volume)
     noise_reduction_db = -20 * (1/noise_level)  # This creates a logarithmic relationship
+    # noise_reduction_db = noise * (1 - noise_level)  # Linear relationship
     return noise - abs(noise_reduction_db)
+
 
 def overlay_noise(audio_segment, noise_file, noise_level):
     # Load the noise file
