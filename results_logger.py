@@ -6,7 +6,7 @@ class ResultsLogger:
         self.file_path = file_path
 
     def log_results(self, analyzer):
-        """Log results from the AudioQualityAnalyzer with the new data structure"""
+        """Log results from AudioQualityAnalyzer"""
         with open(self.file_path, 'a') as file:
             file.write(f"\nAnalysis Results for {analyzer.language.capitalize()}\n")
             file.write(f"{'='*50}\n")
@@ -83,4 +83,3 @@ class ResultsLogger:
                 print(file.read())
         except FileNotFoundError:
             print("No results file found.")
-
