@@ -7,9 +7,10 @@ class AudioQualityAnalyzer:
         self.language = language
         self.ref_dir = ref_dir
         self.deg_dir = deg_dir
-        self.degradation_levels = np.linspace(0, 1, 101)
+        # self.degradation_levels = list(np.arange(-30, 40, 2))
+        self.degradation_levels = [-5,0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80]
         
-        # New results structure:
+        # Results data structure:
         # {
         #     'file1.wav': {
         #         'noise': {  # degradation type
@@ -74,7 +75,7 @@ class AudioQualityAnalyzer:
                             for metric in self.metrics:
                                 score = metric.calculate_score(ref, deg)
                                 self.results[file_name][deg_type.name][level][metric.name] = score
-                                print(f'    {metric.name} Score: {score:.3f}')
+                                # print(f'    {metric.name} Score: {score:.3f}')
                             
                             # Clean up temporary degraded file
                             # os.remove(deg_path)
