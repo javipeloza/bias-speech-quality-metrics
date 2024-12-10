@@ -7,10 +7,7 @@ class AudioQualityAnalyzer:
         self.language = language
         self.ref_dir = ref_dir
         self.deg_dir = deg_dir
-        # self.degradation_levels = list(np.arange(-30, 40, 2))
-        # self.degradation_levels = [-5,0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80]
-        self.degradation_levels = [-400,-300,-100,-40,0,100, 200,300]
-        # self.degradation_levels = [10]
+        self.degradation_levels = list(np.arange(-90, 20, 2))
         
         # Results data structure:
         # {
@@ -58,7 +55,7 @@ class AudioQualityAnalyzer:
                     
                     # Test each degradation level
                     for level in self.degradation_levels:
-                        print(f'  Testing level: {level:.2f}')
+                        print(f'Degradation intensity: {level:.2f}')
                         deg_path = os.path.join(
                             self.deg_dir, 
                             f'temp_{deg_type.name}_{level}_{file_name}'

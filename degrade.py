@@ -2,6 +2,29 @@ from pydub import AudioSegment
 from pydub.generators import WhiteNoise
 from pydub.effects import low_pass_filter, high_pass_filter
 import numpy as np
+import os
+
+def encode_decode_g711(signal):
+    """
+    Encode and decode the audio signal using G.711 codec.
+    
+    Args:
+        signal (AudioSegment): Input audio segment.
+    
+    Returns:
+        AudioSegment: Audio segment after G.711 encoding and decoding.
+    """
+    # Export the signal to a temporary file in G.711 format
+    temp_g711_path = "temp_g711.wav"
+    signal.export(temp_g711_path, format="wav", codec="pcm_alaw")
+
+    # Read the G.711 encoded file back into an AudioSegment
+    decoded_signal = AudioSegment.from_file(temp_g711_path)
+
+    # Clean up the temporary file
+    os.remove(temp_g711_path)
+
+    return decoded_signal
 
 def normalize_signal(signal, target_dbfs=-26):
     """
@@ -131,6 +154,9 @@ def create_degraded_audio(input_path, output_path, snr=20):
 
     # Normalize to -26 dBFS
     normalized_signal = normalize_signal(degraded_signal)
+
+    # Encode and decode using G.711 codec
+    normalized_signal = encode_decode_g711(normalized_signal)
 
     # Save degraded audio with original parameters
     normalized_signal.export(
