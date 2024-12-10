@@ -11,7 +11,7 @@ class MetricStrategy:
 
 class PESQStrategy(MetricStrategy):
     def calculate_score(self, ref, deg):
-        return pesq(16000, ref, deg, 'wb')
+        return pesq(8000, ref, deg, 'nb')
     
     @property
     def name(self):
@@ -19,7 +19,7 @@ class PESQStrategy(MetricStrategy):
     
 class ViSQOLStrategy(MetricStrategy):
     def calculate_score(self, ref, deg):
-        return pesq(16000, ref, deg, 'wb')  # Replace with actual ViSQOL implementation
+        return pesq(8000, ref, deg, 'nb')  # Replace with actual ViSQOL implementation
     
     @property
     def name(self):

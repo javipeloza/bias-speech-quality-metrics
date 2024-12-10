@@ -2,8 +2,7 @@ from analyzer import AudioQualityAnalyzer
 from metrics import PESQStrategy
 from degradation_types import NoiseType
 from results_logger import ResultsLogger
-import os
-import shutil
+from file_manager import FileManager
 
 if __name__ == '__main__':
     # Directory paths
@@ -19,15 +18,7 @@ if __name__ == '__main__':
         deg_dir = f"./audio/degraded/{language}"
 
         # Clean all files in the degraded directory
-        for filename in os.listdir(deg_dir):
-            file_path = os.path.join(deg_dir, filename)
-            try:
-                if os.path.isfile(file_path) or os.path.islink(file_path):
-                    os.unlink(file_path)
-                elif os.path.isdir(file_path):
-                    shutil.rmtree(file_path)
-            except Exception as e:
-                print(f'Failed to delete {file_path}. Reason: {e}')
+        FileManager.clean_directory(deg_dir)
 
         # Initialize analyzer
         analyzer = AudioQualityAnalyzer(language, ref_dir, deg_dir)

@@ -1,8 +1,9 @@
 from pydub import AudioSegment
 from pydub.generators import WhiteNoise
+from pydub.effects import low_pass_filter, high_pass_filter
 import numpy as np
 
-def normalize_audio(audio_segment, target_dbfs=-26):
+def normalize_signal(signal, target_dbfs=-26):
     """
     Normalize audio to target dBFS level using apply_gain
     
@@ -13,10 +14,10 @@ def normalize_audio(audio_segment, target_dbfs=-26):
     Returns:
         AudioSegment: Normalized audio segment
     """
-    gain_needed = target_dbfs - audio_segment.max_dBFS
-    return audio_segment.apply_gain(gain_needed)
+    gain_needed = target_dbfs - signal.dBFS
+    return signal.apply_gain(gain_needed)
 
-def adjust_noise_volume_snr(noise, audio_segment, target_snr_db):
+def adjust_noise_volume_snr(noise, signal, target_snr_db):
     """
     Add noise to audio maintaining a specific Signal-to-Noise Ratio (SNR)
     
@@ -29,12 +30,12 @@ def adjust_noise_volume_snr(noise, audio_segment, target_snr_db):
         AudioSegment: Audio with added noise at specified SNR.
     """
     # Get the signal and noise powers
-    signal_rms = audio_segment.rms
+    signal_rms = signal.rms
     noise_rms = noise.rms
 
     print(f"Signal RMS: {signal_rms}")
-    print(f"Signal dBFS: {audio_segment.dBFS}")
-    print(f"Signal Max dBFS: {audio_segment.max_dBFS}")
+    print(f"Signal dBFS: {signal.dBFS}")
+    print(f"Signal Max dBFS: {signal.max_dBFS}")
     print(f"Noise RMS: {noise_rms}")
     print(f"Noise dBFS: {noise.dBFS}")
     print(f"Noise Max dBFS: {noise.max_dBFS}")
@@ -61,20 +62,42 @@ def adjust_noise_volume_snr(noise, audio_segment, target_snr_db):
 
     return adjusted_noise
 
-def add_white_noise(audio_segment, snr, noise_file_path=None):
+def simulate_narrowband(signal):
+    """
+    Simulate narrowband telephony by resampling to 8 kHz and applying a 300-3400 Hz bandpass filter.
+    
+    Args:
+        signal (AudioSegment): Input audio segment.
+    
+    Returns:
+        AudioSegment: Audio segment processed to simulate narrowband telephony.
+    """
+    # Step 1: Downsample to 8 kHz
+    signal = signal.set_frame_rate(8000)
+
+    # Step 2: Apply a high-pass filter to remove frequencies below 300 Hz
+    signal = high_pass_filter(signal, 300)
+
+    # Step 3: Apply a low-pass filter to remove frequencies above 3400 Hz
+    signal = low_pass_filter(signal, 3400)
+
+    return signal
+
+def add_white_noise(signal, snr, noise_file_path=None):
     if noise_file_path:
         noise = AudioSegment.from_file(noise_file_path)
         # Loop noise if needed to match signal length
-        noise = (noise * (len(audio_segment) // len(noise) + 1))[:len(audio_segment)]
+        noise = (noise * (len(signal) // len(noise) + 1))[:len(signal)]
     else:
         # Generate white noise audio segment with the same duration
-        noise = WhiteNoise().to_audio_segment(duration=len(audio_segment))
+        noise = WhiteNoise().to_audio_segment(duration=len(signal))
 
-    noise = normalize_audio(noise)
-    noise = adjust_noise_volume_snr(noise, audio_segment, snr)
+    noise = simulate_narrowband(signal)
+    noise = normalize_signal(noise)
+    noise = adjust_noise_volume_snr(noise, signal, snr)
     
     # Overlay the noise onto the original audio
-    return audio_segment.overlay(noise)
+    return signal.overlay(noise)
 
 def create_degraded_audio(input_path, output_path, snr=20):
     """
@@ -86,21 +109,34 @@ def create_degraded_audio(input_path, output_path, snr=20):
         noise_level (float): Level of random noise to add (0 to 1)
     """
     # Read input audio file using pydub
-    audio_segment = AudioSegment.from_file(input_path)
+    signal = AudioSegment.from_file(input_path)
+
+    # Simulate narrowband
+    signal = simulate_narrowband(signal)
     
     # Normalize to -26 dBFS
-    normalized_audio = normalize_audio(audio_segment)
-    # noise_file_path = './audio/noise/LTASmatched_noise.wav'
+    normalized_signal = normalize_signal(signal)
+
+    # Save temp file with new reference file
+    temp_ref_path = input_path.replace('.wav', '_temp_ref.wav')  # Updated export path
+    normalized_signal.export(
+        temp_ref_path, 
+        format="wav",
+        parameters=["-ar", str(signal.frame_rate)]  # Preserve sample rate
+    )
 
     # Add noise
-    degraded_audio_segment = add_white_noise(normalized_audio, snr)
+    noise_file_path = './audio/noise/LTASmatched_noise.wav'
+    degraded_signal = add_white_noise(normalized_signal, snr)
 
     # Normalize to -26 dBFS
-    normalized_audio = normalize_audio(degraded_audio_segment)
+    normalized_signal = normalize_signal(degraded_signal)
 
     # Save degraded audio with original parameters
-    degraded_audio_segment.export(
+    normalized_signal.export(
         output_path, 
         format="wav",
-        parameters=["-ar", str(audio_segment.frame_rate)]  # Preserve sample rate
+        parameters=["-ar", str(signal.frame_rate)]  # Preserve sample rate
     )
+
+    return temp_ref_path

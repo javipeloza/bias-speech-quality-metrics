@@ -11,7 +11,7 @@ class DegradationType:
 
 class NoiseType(DegradationType):
     def apply_degradation(self, ref_path, deg_path, level):
-        create_degraded_audio(ref_path, deg_path, snr=level)
+        return create_degraded_audio(ref_path, deg_path, snr=level)
     
     @property
     def name(self):

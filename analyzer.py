@@ -8,7 +8,9 @@ class AudioQualityAnalyzer:
         self.ref_dir = ref_dir
         self.deg_dir = deg_dir
         # self.degradation_levels = list(np.arange(-30, 40, 2))
-        self.degradation_levels = [-5,0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80]
+        # self.degradation_levels = [-5,0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80]
+        self.degradation_levels = [-400,-300,-100,-40,0,100, 200,300]
+        # self.degradation_levels = [10]
         
         # Results data structure:
         # {
@@ -49,9 +51,6 @@ class AudioQualityAnalyzer:
             self.results[file_name] = {}
 
             try:
-                # Read reference file once
-                _, ref = wavfile.read(ref_path)
-                
                 # Test each degradation type
                 for deg_type in self.degradation_types:
                     print(f'Testing degradation type: {deg_type.name}')
@@ -67,18 +66,19 @@ class AudioQualityAnalyzer:
                         
                         try:
                             # Apply degradation
-                            deg_type.apply_degradation(ref_path, deg_path, level)
+                            temp_ref_path = deg_type.apply_degradation(ref_path, deg_path, level)
                             _, deg = wavfile.read(deg_path)
+                            _, temp_ref = wavfile.read(temp_ref_path)
                             
                             # Calculate scores for all metrics
                             self.results[file_name][deg_type.name][level] = {}
                             for metric in self.metrics:
-                                score = metric.calculate_score(ref, deg)
+                                score = metric.calculate_score(temp_ref, deg)
                                 self.results[file_name][deg_type.name][level][metric.name] = score
                                 # print(f'    {metric.name} Score: {score:.3f}')
                             
-                            # Clean up temporary degraded file
-                            # os.remove(deg_path)
+                            # Clean up temporary reference file
+                            os.remove(temp_ref_path)
                             
                         except Exception as e:
                             print(f"Error at {deg_type.name} level {level}: {str(e)}")
