@@ -113,7 +113,7 @@ def add_white_noise(signal, snr, noise_file_path=None):
         noise = (noise * (len(signal) // len(noise) + 1))[:len(signal)]
     else:
         # Generate white noise audio segment with the same duration
-        noise = WhiteNoise().to_audio_segment(duration=len(signal))
+        noise = WhiteNoise().to_audio_segment(duration=len(signal)).split_to_mono()[0]
 
     noise = simulate_narrowband(signal)
     noise = normalize_signal(noise)
@@ -121,6 +121,19 @@ def add_white_noise(signal, snr, noise_file_path=None):
     
     # Overlay the noise onto the original audio
     return signal.overlay(noise)
+
+def export_file(signal, path):
+    signal.export(
+        path, 
+        format="wav",
+        parameters=[
+            "-ar", str(signal.frame_rate),   # Preserve sample rate
+            "-ac", "1", # Channels: mono
+            "-sample_fmt", "s16",
+        ]
+    )
+
+    return path
 
 def create_degraded_audio(input_path, output_path, snr=20):
     """
@@ -134,6 +147,9 @@ def create_degraded_audio(input_path, output_path, snr=20):
     # Read input audio file using pydub
     signal = AudioSegment.from_file(input_path)
 
+    # Convert signal to mono
+    signal = signal.split_to_mono()[0]
+
     # Simulate narrowband
     signal = simulate_narrowband(signal)
     
@@ -142,11 +158,7 @@ def create_degraded_audio(input_path, output_path, snr=20):
 
     # Save temp file with new reference file
     temp_ref_path = input_path.replace('.wav', '_temp_ref.wav')  # Updated export path
-    normalized_signal.export(
-        temp_ref_path, 
-        format="wav",
-        parameters=["-ar", str(signal.frame_rate)]  # Preserve sample rate
-    )
+    export_file(normalized_signal, temp_ref_path)
 
     # Add noise
     noise_file_path = './audio/noise/LTASmatched_noise.wav'
@@ -159,10 +171,6 @@ def create_degraded_audio(input_path, output_path, snr=20):
     normalized_signal = encode_decode_g711(normalized_signal)
 
     # Save degraded audio with original parameters
-    normalized_signal.export(
-        output_path, 
-        format="wav",
-        parameters=["-ar", str(signal.frame_rate)]  # Preserve sample rate
-    )
+    export_file(normalized_signal, output_path)
 
     return temp_ref_path

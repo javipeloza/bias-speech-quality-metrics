@@ -7,7 +7,8 @@ class AudioQualityAnalyzer:
         self.language = language
         self.ref_dir = ref_dir
         self.deg_dir = deg_dir
-        self.degradation_levels = list(np.arange(-90, 20, 2))
+        self.degradation_levels = list(np.arange(-90, 30, 2))
+        # self.degradation_levels = [0]
         
         # Results data structure:
         # {
