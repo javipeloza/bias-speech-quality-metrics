@@ -1,29 +1,16 @@
 import os
 import numpy as np
 from scipy.io import wavfile
+from degrade import generate_degraded_signal
 
 class AudioQualityAnalyzer:
     def __init__(self, language, ref_dir, deg_dir):
         self.language = language
         self.ref_dir = ref_dir
         self.deg_dir = deg_dir
-        self.degradation_levels = list(np.arange(-10, 41, 10))
+        self.degradation_levels = list(np.arange(-15, 51, 5))
         # self.degradation_levels = [-72,-70,-8,-6]
         
-        # Results data structure:
-        # {
-        #     'file1.wav': {
-        #         'noise': {  # degradation type
-        #             0.0: {  # degradation level
-        #                 'PESQ': 4.5,
-        #                 'ViSQOL': 4.2
-        #             },
-        #             0.25: {...}
-        #         },
-        #         'echo': {...}
-        #     },
-        #     'file2.wav': {...}
-        # }
         self.results = {}
         self.skipped_files = []
         
@@ -64,7 +51,7 @@ class AudioQualityAnalyzer:
                         
                         try:
                             # Apply degradation
-                            temp_ref_path = deg_type.apply_degradation(ref_path, deg_path, level)
+                            temp_ref_path = generate_degraded_signal(ref_path, deg_path, deg_type, level)
                             _, deg = wavfile.read(deg_path)
                             _, temp_ref = wavfile.read(temp_ref_path)
                             

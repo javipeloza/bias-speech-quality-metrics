@@ -1,8 +1,8 @@
-from degrade import create_degraded_audio
+from degrade import overlay_signal
 
 class DegradationType:
     """Base class for different types of degradation"""
-    def apply_degradation(self, ref_path, deg_path, level):
+    def apply_degradation(self, signal, snr):
         raise NotImplementedError("Must implement apply_degradation method")
     
     @property
@@ -10,8 +10,11 @@ class DegradationType:
         raise NotImplementedError("Must implement name property")
 
 class NoiseType(DegradationType):
-    def apply_degradation(self, ref_path, deg_path, level):
-        return create_degraded_audio(ref_path, deg_path, snr=level)
+    
+    def apply_degradation(self, signal, snr):
+        noise_file_path = './audio/noise/LTASmatched_noise.wav'
+        signal = overlay_signal(signal, snr, noise_file_path)
+        return signal
     
     @property
     def name(self):

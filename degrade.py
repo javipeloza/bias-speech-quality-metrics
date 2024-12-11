@@ -97,24 +97,17 @@ def simulate_narrowband(signal):
     """
     # Step 1: Downsample to 8 kHz
     signal = signal.set_frame_rate(8000)
-
     # Step 2: Apply a high-pass filter to remove frequencies below 300 Hz
     signal = high_pass_filter(signal, 300)
-
     # Step 3: Apply a low-pass filter to remove frequencies above 3400 Hz
     signal = low_pass_filter(signal, 3400)
 
     return signal
 
-def add_white_noise(signal, snr, noise_file_path=None):
-    if noise_file_path:
-        noise = AudioSegment.from_file(noise_file_path)
-        # Loop noise if needed to match signal length
-        noise = (noise * (len(signal) // len(noise) + 1))[:len(signal)]
-    else:
-        # Generate white noise audio segment with the same duration
-        noise = WhiteNoise().to_audio_segment(duration=len(signal))
-
+def overlay_signal(signal, snr, noise_file_path):
+    noise = AudioSegment.from_file(noise_file_path)
+    # Loop noise if needed to match signal length
+    noise = (noise * (len(signal) // len(noise) + 1))[:len(signal)]
     noise = noise.split_to_mono()[0]
     noise = simulate_narrowband(noise)
     noise = normalize_signal(noise)
@@ -136,7 +129,7 @@ def export_file(signal, path):
 
     return path
 
-def create_degraded_audio(input_path, output_path, snr=20):
+def generate_degraded_signal(input_path, output_path, deg_type, snr=20):
     """
     Read audio file, normalize it to -26 dBFS, degrade it, and save to new location
     
@@ -147,6 +140,8 @@ def create_degraded_audio(input_path, output_path, snr=20):
     """
     # Read input audio file using pydub
     signal = AudioSegment.from_file(input_path)
+    
+    # Pre-process:
 
     # Convert signal to mono
     signal = signal.split_to_mono()[0]
@@ -161,9 +156,8 @@ def create_degraded_audio(input_path, output_path, snr=20):
     temp_ref_path = input_path.replace('.wav', '_temp_ref.wav')  # Updated export path
     export_file(encode_decode(signal), temp_ref_path)
 
-    # Add noise
-    noise_file_path = './audio/noise/LTASmatched_noise.wav'
-    signal = add_white_noise(signal, snr, noise_file_path)
+    # Perform degradation
+    signal = deg_type.apply_degradation(signal, snr)
 
     # Normalize to -26 dBFS
     signal = normalize_signal(signal)
