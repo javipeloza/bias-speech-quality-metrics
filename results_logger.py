@@ -76,10 +76,42 @@ class ResultsLogger:
                 )
                 plt.close()
 
-    def display_results(self):
-        """Display the contents of the results file"""
-        try:
-            with open(self.file_path, 'r') as file:
-                print(file.read())
-        except FileNotFoundError:
-            print("No results file found.")
+    def plot_results_table(self, statistical_results, languages):
+        """
+        Plot results in a table format where rows are metrics and columns are F-statistic and p-value.
+        
+        Args:
+            statistical_results (dict): Dictionary containing statistical results with metrics as keys.
+            languages (list): List of languages to include in the title and filename.
+        """
+        # Generate save path based on languages
+        languages_filename = '_'.join(lang.lower() for lang in languages)
+        save_path = f'./results/statistical_results_table_{languages_filename}.png'
+
+        metrics = list(statistical_results.keys())
+        f_statistics = [statistical_results[metric]['F-statistic'] for metric in metrics]
+        p_values = [statistical_results[metric]['p-value'] for metric in metrics]
+
+        # Create a figure and axis
+        fig, ax = plt.subplots(figsize=(8, len(metrics) * 0.5 + 1))  # Adjust height based on number of metrics
+        ax.axis('tight')
+        ax.axis('off')
+
+        # Create table data
+        table_data = [["Metric", "F-statistic", "p-value"]] + [[metric, f_stat, p_val] for metric, f_stat, p_val in zip(metrics, f_statistics, p_values)]
+
+        # Create the table
+        table = ax.table(cellText=table_data, colLabels=None, cellLoc='center', loc='center')
+
+        # Adjust table style
+        table.auto_set_font_size(False)
+        table.set_fontsize(10)
+        table.scale(1.2, 1.2)
+
+        # Create title
+        languages_str = ', '.join(languages)
+        plt.title(f'Statistical Results for: {languages_str}')
+
+        # Save the table as an image
+        plt.savefig(save_path, bbox_inches='tight')
+        plt.close()

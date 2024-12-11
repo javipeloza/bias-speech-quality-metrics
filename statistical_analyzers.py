@@ -129,7 +129,7 @@ class Anova(StatisticalAnalyzer):
                 aggregated_scores.append(aggregated_by_metric[metric][language])
 
             f_stat, p_value = f_oneway(*aggregated_scores)
-            statistical_results[metric][language] = {
+            statistical_results[metric] = {
 				'F-statistic': f_stat,
 				'p-value': p_value
 			}

@@ -9,7 +9,7 @@ import os
 if __name__ == '__main__':
     # Directory paths
     languages = ['turkish', 'english','korean','spanish','chinese']
-    languages = ['english','turkish']
+    # languages = ['english','turkish','spanish']
     
     results_file = './results/analysis_results.txt'
     logger = ResultsLogger(results_file)
@@ -60,6 +60,7 @@ if __name__ == '__main__':
     # Analyze results 
     for statistical_analyzer in statistical_analyzers:
         stats = statistical_analyzer.analyze(results, NoiseType().name, languages)
+        logger.plot_results_table(stats, languages)
         for metric, result in stats.items():
             print(f"{statistical_analyzer.name} Results for {metric} under {NoiseType().name}:")
             print(result)
