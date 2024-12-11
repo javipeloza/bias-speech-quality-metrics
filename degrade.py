@@ -153,7 +153,7 @@ def generate_degraded_signal(input_path, output_path, deg_type, snr=20):
     signal = normalize_signal(signal)
 
     # Save temp file with new reference file
-    temp_ref_path = input_path.replace('.wav', '_temp_ref.wav')  # Updated export path
+    temp_ref_path = os.path.join(os.path.dirname(input_path), 'temp_ref', f"{os.path.splitext(os.path.basename(input_path))[0]}_temp_ref.wav")  # Updated export path
     export_file(encode_decode(signal), temp_ref_path)
 
     # Perform degradation

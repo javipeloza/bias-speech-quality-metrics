@@ -62,9 +62,6 @@ class AudioQualityAnalyzer:
                                 self.results[file_name][deg_type.name][level][metric.name] = score
                                 print(f'{metric.name} Score: {score:.3f}')
                             
-                            # Clean up temporary reference file
-                            os.remove(temp_ref_path)
-                            
                         except Exception as e:
                             print(f"Error at {deg_type.name} level {level}: {str(e)}")
                             self.results[file_name][deg_type.name][level] = None
