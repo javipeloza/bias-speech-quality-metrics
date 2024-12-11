@@ -1,29 +1,30 @@
 import os
 import numpy as np
 from scipy.io import wavfile
+from degrade import generate_degraded_signal
 
 class AudioQualityAnalyzer:
     def __init__(self, language, ref_dir, deg_dir):
         self.language = language
         self.ref_dir = ref_dir
         self.deg_dir = deg_dir
-        # self.degradation_levels = list(np.arange(-30, 40, 2))
-        self.degradation_levels = [-5,0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80]
+        self.degradation_levels = list(np.arange(-40, 41, 5))
+        # self.degradation_levels = [-20,20,80]
+
+        """
+            results: {
+                file_name_1: {
+                    noise: {
+                        snr_1: {
+                            'PESQ': 1.75,
+                            'ViSQOL': 1.88
+                        },
+                        snr2: {...}
+                    }
+                }
+            }
+        """
         
-        # Results data structure:
-        # {
-        #     'file1.wav': {
-        #         'noise': {  # degradation type
-        #             0.0: {  # degradation level
-        #                 'PESQ': 4.5,
-        #                 'ViSQOL': 4.2
-        #             },
-        #             0.25: {...}
-        #         },
-        #         'echo': {...}
-        #     },
-        #     'file2.wav': {...}
-        # }
         self.results = {}
         self.skipped_files = []
         
@@ -49,9 +50,6 @@ class AudioQualityAnalyzer:
             self.results[file_name] = {}
 
             try:
-                # Read reference file once
-                _, ref = wavfile.read(ref_path)
-                
                 # Test each degradation type
                 for deg_type in self.degradation_types:
                     print(f'Testing degradation type: {deg_type.name}')
@@ -59,30 +57,30 @@ class AudioQualityAnalyzer:
                     
                     # Test each degradation level
                     for level in self.degradation_levels:
-                        print(f'  Testing level: {level:.2f}')
+                        print(f'Degradation intensity: {level:.2f}')
                         deg_path = os.path.join(
                             self.deg_dir, 
-                            f'temp_{deg_type.name}_{level}_{file_name}'
+                            f'deg_{deg_type.name}_{level}_{file_name}'
                         )
                         
                         try:
                             # Apply degradation
-                            deg_type.apply_degradation(ref_path, deg_path, level)
+                            temp_ref_path = generate_degraded_signal(ref_path, deg_path, deg_type, level)
                             _, deg = wavfile.read(deg_path)
+                            _, temp_ref = wavfile.read(temp_ref_path)
                             
                             # Calculate scores for all metrics
                             self.results[file_name][deg_type.name][level] = {}
                             for metric in self.metrics:
-                                score = metric.calculate_score(ref, deg)
+                                score = metric.calculate_score(temp_ref, deg)
                                 self.results[file_name][deg_type.name][level][metric.name] = score
-                                # print(f'    {metric.name} Score: {score:.3f}')
-                            
-                            # Clean up temporary degraded file
-                            # os.remove(deg_path)
+                                print(f'{metric.name} Score: {score:.3f}')
                             
                         except Exception as e:
                             print(f"Error at {deg_type.name} level {level}: {str(e)}")
                             self.results[file_name][deg_type.name][level] = None
+
+                        print("----------------------------------------------------")
 
             except Exception as e:
                 print(f"Skipping file {file_name}: {str(e)}")
@@ -138,3 +136,6 @@ class AudioQualityAnalyzer:
 
     def get_skipped_count(self):
         return len(self.skipped_files)
+    
+    def get_results(self):
+        return self.results
