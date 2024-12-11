@@ -8,8 +8,22 @@ class AudioQualityAnalyzer:
         self.language = language
         self.ref_dir = ref_dir
         self.deg_dir = deg_dir
-        self.degradation_levels = list(np.arange(-15, 51, 5))
-        # self.degradation_levels = [-72,-70,-8,-6]
+        self.degradation_levels = list(np.arange(-40, 41, 5))
+        # self.degradation_levels = [-20,20,80]
+
+        """
+            results: {
+                file_name_1: {
+                    noise: {
+                        snr_1: {
+                            'PESQ': 1.75,
+                            'ViSQOL': 1.88
+                        },
+                        snr2: {...}
+                    }
+                }
+            }
+        """
         
         self.results = {}
         self.skipped_files = []
@@ -122,3 +136,6 @@ class AudioQualityAnalyzer:
 
     def get_skipped_count(self):
         return len(self.skipped_files)
+    
+    def get_results(self):
+        return self.results

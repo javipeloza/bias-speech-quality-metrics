@@ -57,31 +57,31 @@ def adjust_noise_volume_snr(noise, signal, target_snr_db):
     signal_rms = signal.rms
     noise_rms = noise.rms
 
-    print(f"Signal RMS: {signal_rms}")
-    print(f"Signal dBFS: {signal.dBFS}")
-    print(f"Signal Max dBFS: {signal.max_dBFS}")
-    print(f"Noise RMS: {noise_rms}")
-    print(f"Noise dBFS: {noise.dBFS}")
-    print(f"Noise Max dBFS: {noise.max_dBFS}")
+    # print(f"Signal RMS: {signal_rms}")
+    # print(f"Signal dBFS: {signal.dBFS}")
+    # print(f"Signal Max dBFS: {signal.max_dBFS}")
+    # print(f"Noise RMS: {noise_rms}")
+    # print(f"Noise dBFS: {noise.dBFS}")
+    # print(f"Noise Max dBFS: {noise.max_dBFS}")
     
     # Calculate the gain needed for desired SNR
     # SNR = 20 * log10(signal_rms / noise_rms_desired)
     # Therefore: noise_rms_desired = signal_rms / (10^(SNR/20))
     desired_noise_rms = signal_rms / (10 ** (target_snr_db / 20))
 
-    print(f"Desired Noise RMS: {desired_noise_rms}")
+    # print(f"Desired Noise RMS: {desired_noise_rms}")
 
     # Calculate required gain
     gain_db = 20 * np.log10(desired_noise_rms / noise_rms)
 
-    print(f"Gain (dB): {gain_db}")
+    # print(f"Gain (dB): {gain_db}")
 
     # Apply gain to noise
     adjusted_noise = noise.apply_gain(gain_db)
 
-    print(f"Adjusted Noise RMS: {adjusted_noise.rms}")
-    print(f"Adjusted Noise dBFS: {adjusted_noise.dBFS}")
-    print(f"Adjusted Noise Max dBFS: {adjusted_noise.max_dBFS}")
+    # print(f"Adjusted Noise RMS: {adjusted_noise.rms}")
+    # print(f"Adjusted Noise dBFS: {adjusted_noise.dBFS}")
+    # print(f"Adjusted Noise Max dBFS: {adjusted_noise.max_dBFS}")
 
     return adjusted_noise
 
