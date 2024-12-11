@@ -7,8 +7,8 @@ class AudioQualityAnalyzer:
         self.language = language
         self.ref_dir = ref_dir
         self.deg_dir = deg_dir
-        self.degradation_levels = list(np.arange(-90, 30, 2))
-        # self.degradation_levels = [0]
+        self.degradation_levels = list(np.arange(-10, 41, 10))
+        # self.degradation_levels = [-72,-70,-8,-6]
         
         # Results data structure:
         # {
@@ -59,7 +59,7 @@ class AudioQualityAnalyzer:
                         print(f'Degradation intensity: {level:.2f}')
                         deg_path = os.path.join(
                             self.deg_dir, 
-                            f'temp_{deg_type.name}_{level}_{file_name}'
+                            f'deg_{deg_type.name}_{level}_{file_name}'
                         )
                         
                         try:
@@ -73,7 +73,7 @@ class AudioQualityAnalyzer:
                             for metric in self.metrics:
                                 score = metric.calculate_score(temp_ref, deg)
                                 self.results[file_name][deg_type.name][level][metric.name] = score
-                                # print(f'    {metric.name} Score: {score:.3f}')
+                                print(f'{metric.name} Score: {score:.3f}')
                             
                             # Clean up temporary reference file
                             os.remove(temp_ref_path)
@@ -81,6 +81,8 @@ class AudioQualityAnalyzer:
                         except Exception as e:
                             print(f"Error at {deg_type.name} level {level}: {str(e)}")
                             self.results[file_name][deg_type.name][level] = None
+
+                        print("----------------------------------------------------")
 
             except Exception as e:
                 print(f"Skipping file {file_name}: {str(e)}")

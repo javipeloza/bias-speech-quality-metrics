@@ -4,25 +4,26 @@ from pydub.effects import low_pass_filter, high_pass_filter
 import numpy as np
 import os
 
-def encode_decode_g711(signal):
+def encode_decode(signal, codec="pcm_alaw", temp_file_path="temp_audio.wav"):
     """
-    Encode and decode the audio signal using G.711 codec.
+    Encode and decode the audio signal using specified codec.
     
     Args:
         signal (AudioSegment): Input audio segment.
+        codec (str): Codec name for encoding (default: "pcm_alaw").
+        temp_file_path (str): Path to save the temporary file (default: "temp_audio.wav").
     
     Returns:
-        AudioSegment: Audio segment after G.711 encoding and decoding.
+        AudioSegment: Audio segment after encoding and decoding.
     """
-    # Export the signal to a temporary file in G.711 format
-    temp_g711_path = "temp_g711.wav"
-    signal.export(temp_g711_path, format="wav", codec="pcm_alaw")
+    # Export the signal to a temporary file in the specified codec format
+    signal.export(temp_file_path, format="wav", codec=codec)
 
-    # Read the G.711 encoded file back into an AudioSegment
-    decoded_signal = AudioSegment.from_file(temp_g711_path)
+    # Read the encoded file back into an AudioSegment
+    decoded_signal = AudioSegment.from_file(temp_file_path)
 
     # Clean up the temporary file
-    os.remove(temp_g711_path)
+    os.remove(temp_file_path)
 
     return decoded_signal
 
@@ -81,7 +82,6 @@ def adjust_noise_volume_snr(noise, signal, target_snr_db):
     print(f"Adjusted Noise RMS: {adjusted_noise.rms}")
     print(f"Adjusted Noise dBFS: {adjusted_noise.dBFS}")
     print(f"Adjusted Noise Max dBFS: {adjusted_noise.max_dBFS}")
-    print("----------------------------------------------------")
 
     return adjusted_noise
 
@@ -113,9 +113,10 @@ def add_white_noise(signal, snr, noise_file_path=None):
         noise = (noise * (len(signal) // len(noise) + 1))[:len(signal)]
     else:
         # Generate white noise audio segment with the same duration
-        noise = WhiteNoise().to_audio_segment(duration=len(signal)).split_to_mono()[0]
+        noise = WhiteNoise().to_audio_segment(duration=len(signal))
 
-    noise = simulate_narrowband(signal)
+    noise = noise.split_to_mono()[0]
+    noise = simulate_narrowband(noise)
     noise = normalize_signal(noise)
     noise = adjust_noise_volume_snr(noise, signal, snr)
     
@@ -142,7 +143,7 @@ def create_degraded_audio(input_path, output_path, snr=20):
     Args:
         input_path (str): Path to input audio file
         output_path (str): Path to save degraded audio
-        noise_level (float): Level of random noise to add (0 to 1)
+        snr (float): Signal-to-noise ratio (dB)
     """
     # Read input audio file using pydub
     signal = AudioSegment.from_file(input_path)
@@ -154,23 +155,23 @@ def create_degraded_audio(input_path, output_path, snr=20):
     signal = simulate_narrowband(signal)
     
     # Normalize to -26 dBFS
-    normalized_signal = normalize_signal(signal)
+    signal = normalize_signal(signal)
 
     # Save temp file with new reference file
     temp_ref_path = input_path.replace('.wav', '_temp_ref.wav')  # Updated export path
-    export_file(normalized_signal, temp_ref_path)
+    export_file(encode_decode(signal), temp_ref_path)
 
     # Add noise
     noise_file_path = './audio/noise/LTASmatched_noise.wav'
-    degraded_signal = add_white_noise(normalized_signal, snr)
+    signal = add_white_noise(signal, snr, noise_file_path)
 
     # Normalize to -26 dBFS
-    normalized_signal = normalize_signal(degraded_signal)
+    signal = normalize_signal(signal)
 
     # Encode and decode using G.711 codec
-    normalized_signal = encode_decode_g711(normalized_signal)
+    signal = encode_decode(signal)
 
     # Save degraded audio with original parameters
-    export_file(normalized_signal, output_path)
+    export_file(signal, output_path)
 
     return temp_ref_path
