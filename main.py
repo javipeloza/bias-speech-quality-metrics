@@ -9,7 +9,7 @@ import os
 if __name__ == '__main__':
     # Directory paths
     languages = ['turkish', 'english','korean','spanish','chinese']
-    languages = ['english','turkish']
+    # languages = ['english','turkish']
     
     results_file = './results/analysis_results.txt'
     logger = ResultsLogger(results_file)

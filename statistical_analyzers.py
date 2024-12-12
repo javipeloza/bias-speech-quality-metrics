@@ -1,6 +1,5 @@
 from scipy.stats import f_oneway
-import numpy as np
-from statistics_util import perform_post_hoc_tests
+from statistics_util import perform_post_hoc_tests, pairwise_language_comparison, comprehensive_language_bias_analysis
 
 class StatisticalAnalyzer:
     def __init__(self, name):
@@ -139,6 +138,10 @@ class Anova(StatisticalAnalyzer):
             }
 
         perform_post_hoc_tests(aggregated_by_metric)
+
+        pairwise_language_comparison(aggregated_by_metric)
+
+        comprehensive_language_bias_analysis(aggregated_by_metric)
           
 		# Statistical Results: {
         #     'pesq': {

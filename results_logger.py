@@ -1,7 +1,5 @@
 import matplotlib.pyplot as plt
-import numpy as np
 import os
-import pandas as pd
 
 class ResultsLogger:
     def __init__(self, file_path):
@@ -145,3 +143,118 @@ def plot_post_hoc_results(post_hoc_results, output_dir='results'):
         file.write("- Reject null hypothesis (significant difference) if p-adj < 0.05\n")
         file.write("- Positive mean diff indicates first group is higher\n")
         file.write("- Negative mean diff indicates second group is higher\n")
+
+
+def plot_pairwise_language_comparison(pairwise_comparison_results, output_dir='results'):
+    """
+    Plot pairwise language comparison results in a table format.
+
+    Parameters:
+    - pairwise_comparison_results: Dictionary containing pairwise comparison results
+    - output_dir: Directory to save the plot
+    """
+    # Ensure the output directory exists
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Create a figure and axis
+    total_rows = sum(len(pairs) for pairs in pairwise_comparison_results.values()) + len(pairwise_comparison_results) + 1
+    fig, ax = plt.subplots(figsize=(12, total_rows * 0.3))
+    ax.axis('tight')
+    ax.axis('off')
+
+    # Prepare table data
+    table_data = [
+        ["Metric", "Language Pair", "F-statistic", "p-value", "Significant Difference"]
+    ]
+
+    for metric, comparisons in pairwise_comparison_results.items():
+        # Add a row for the metric
+        table_data.append([metric, "", "", "", ""])
+        
+        for (lang1, lang2), results in comparisons.items():
+            table_data.append([
+                "",
+                f"{lang1} vs {lang2}",
+                f"{results['f_statistic']:.4f}",
+                f"{results['p_value']:.4f}",
+                "Yes" if results['significant_difference'] else "No"
+            ])
+
+    # Create the table
+    table = ax.table(cellText=table_data, colLabels=None, cellLoc='center', loc='center')
+
+    # Adjust table style
+    table.auto_set_font_size(False)
+    table.set_fontsize(8)
+    table.scale(1.2, 1.2)
+
+    # Color-code significant differences
+    for i in range(1, len(table_data)):
+        if table_data[i][4] == "Yes":
+            for j in range(5):
+                table[(i, j)].set_facecolor('lightcoral')
+
+    # Create title
+    plt.title('Pairwise Language Comparison Results')
+
+    # Save the table as an image
+    save_path = f'{output_dir}/pairwise_language_comparison.png'
+    plt.savefig(save_path, bbox_inches='tight', dpi=300)
+    plt.close()
+
+    print(f"Pairwise language comparison results plot saved to {save_path}")
+
+def plot_comprehensive_language_bias_analysis(comprehensive_results, output_dir='results'):
+    """
+    Plot comprehensive language bias analysis results in a table format.
+
+    Parameters:
+    - comprehensive_results: Dictionary containing comprehensive language bias analysis results
+    - output_dir: Directory to save the plot
+    """
+    # Ensure the output directory exists
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Create a figure and axis
+    fig, ax = plt.subplots(figsize=(12, len(comprehensive_results) * 0.5 + 1))
+    ax.axis('tight')
+    ax.axis('off')
+
+    # Prepare table data
+    table_data = [
+        ["Metric", "Languages", "F-statistic", "p-value", "Eta-squared", "Significant Bias"]
+    ]
+
+    for metric, results in comprehensive_results.items():
+        table_data.append([
+            metric,
+            ', '.join(results['languages']),
+            f"{results['f_statistic']:.4f}",
+            f"{results['p_value']:.4f}",
+            f"{results['eta_squared']:.4f}",
+            "Yes" if results['significant_bias'] else "No"
+        ])
+
+    # Create the table
+    table = ax.table(cellText=table_data, colLabels=None, cellLoc='center', loc='center')
+
+    # Adjust table style
+    table.auto_set_font_size(False)
+    table.set_fontsize(10)
+    table.scale(1.2, 1.2)
+
+    # Color-code significant bias
+    for i in range(1, len(table_data)):
+        if table_data[i][5] == "Yes":
+            for j in range(6):
+                table[(i, j)].set_facecolor('lightcoral')
+
+    # Create title
+    plt.title('Comprehensive Language Bias Analysis Results')
+
+    # Save the table as an image
+    save_path = f'{output_dir}/comprehensive_language_bias_analysis.png'
+    plt.savefig(save_path, bbox_inches='tight', dpi=300)
+    plt.close()
+
+    print(f"Comprehensive language bias analysis results plot saved to {save_path}")

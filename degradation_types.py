@@ -13,6 +13,7 @@ class NoiseType(DegradationType):
     
     def apply_degradation(self, signal, snr):
         noise_file_path = './audio/noise/LTASmatched_noise.wav'
+        noise_file_path = './audio/noise/pink_noise.wav'
         signal = overlay_signal(signal, snr, noise_file_path)
         return signal
     
