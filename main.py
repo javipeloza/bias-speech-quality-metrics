@@ -1,7 +1,7 @@
 from analyzer import AudioQualityAnalyzer
 from metrics import PESQStrategy
 from degradation_types import NoiseType
-from results_logger import ResultsLogger
+from results_logger import ResultsLogger, plot_analysis_results, plot_statistical_results_table
 from file_manager import FileManager
 from statistical_analyzers import Anova
 import os
@@ -9,7 +9,7 @@ import os
 if __name__ == '__main__':
     # Directory paths
     languages = ['turkish', 'english','korean','spanish','chinese']
-    # languages = ['english','turkish','spanish']
+    languages = ['english','turkish']
     
     results_file = './results/analysis_results.txt'
     logger = ResultsLogger(results_file)
@@ -53,14 +53,12 @@ if __name__ == '__main__':
         analyzers.append(analyzer)
 
     # Create comparative plot
-    logger.plot_results(analyzers)
+    plot_analysis_results(analyzers)
 
     results = [analyzer.get_results() for analyzer in analyzers]
 
     # Analyze results 
     for statistical_analyzer in statistical_analyzers:
-        stats = statistical_analyzer.analyze(results, NoiseType().name, languages)
-        logger.plot_results_table(stats, languages)
-        for metric, result in stats.items():
-            print(f"{statistical_analyzer.name} Results for {metric} under {NoiseType().name}:")
-            print(result)
+        for degradation_type in degradation_types:
+            stats = statistical_analyzer.analyze(results, degradation_type.name, languages)
+            plot_statistical_results_table(stats, languages)

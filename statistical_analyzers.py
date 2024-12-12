@@ -1,4 +1,6 @@
 from scipy.stats import f_oneway
+import numpy as np
+from statistics_util import perform_post_hoc_tests
 
 class StatisticalAnalyzer:
     def __init__(self, name):
@@ -121,18 +123,22 @@ class Anova(StatisticalAnalyzer):
 		# }
 
         statistical_results = {}
-        
-        for metric in aggregated_by_metric:
-            statistical_results[metric] = {}
-            aggregated_scores = []
-            for language in aggregated_by_metric[metric]:
-                aggregated_scores.append(aggregated_by_metric[metric][language])
 
+        # Iterate over each metric
+        for metric, languages in aggregated_by_metric.items():
+            # Collect scores for each language under the current metric
+            aggregated_scores = [scores for scores in languages.values()]
+
+            # Perform one-way ANOVA
             f_stat, p_value = f_oneway(*aggregated_scores)
+
+            # Store the results
             statistical_results[metric] = {
-				'F-statistic': f_stat,
-				'p-value': p_value
-			}
+                'F-statistic': f_stat,
+                'p-value': p_value
+            }
+
+        perform_post_hoc_tests(aggregated_by_metric)
           
 		# Statistical Results: {
         #     'pesq': {
@@ -145,4 +151,3 @@ class Anova(StatisticalAnalyzer):
 		# }
 
         return statistical_results
-		
