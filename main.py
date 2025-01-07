@@ -44,7 +44,7 @@ if __name__ == '__main__':
 
         # Add degradation types
         for degradation_type in degradation_types:
-            analyzer.add_degradation_type(NoiseType())
+            analyzer.add_degradation_type(degradation_type)
 
         # Perform analysis
         analyzer.analyze()
