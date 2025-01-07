@@ -3,6 +3,7 @@ from pydub.generators import WhiteNoise
 from pydub.effects import low_pass_filter, high_pass_filter
 import numpy as np
 import os
+import librosa
 
 def encode_decode(signal, codec="pcm_alaw", temp_file_path="temp_audio.wav"):
     """
@@ -85,7 +86,13 @@ def adjust_noise_volume_snr(noise, signal, target_snr_db):
 
     return adjusted_noise
 
-def simulate_narrowband(signal):
+def resample_signal(signal_path, sampling_rate=8000):
+    signal = AudioSegment.from_file(signal_path)
+    signal.set_frame_rate(sampling_rate)
+
+    return signal
+
+def simulate_narrowband(signal, sampling_rate=8000):
     """
     Simulate narrowband telephony by resampling to 8 kHz and applying a 300-3400 Hz bandpass filter.
     
@@ -96,7 +103,7 @@ def simulate_narrowband(signal):
         AudioSegment: Audio segment processed to simulate narrowband telephony.
     """
     # Step 1: Downsample to 8 kHz
-    signal = signal.set_frame_rate(8000)
+    signal = signal.set_frame_rate(sampling_rate)
     # Step 2: Apply a high-pass filter to remove frequencies below 300 Hz
     signal = high_pass_filter(signal, 300)
     # Step 3: Apply a low-pass filter to remove frequencies above 3400 Hz

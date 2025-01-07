@@ -1,5 +1,5 @@
 from analyzer import AudioQualityAnalyzer
-from metrics import PESQStrategy
+from metrics import PESQStrategy, ViSQOLStrategy, ViSQOLMatLabStrategy
 from degradation_types import NoiseType
 from results_logger import ResultsLogger, plot_analysis_results, plot_statistical_results_table
 from file_manager import FileManager
@@ -8,15 +8,17 @@ import os
 
 if __name__ == '__main__':
     # Directory paths
-    languages = ['turkish', 'english','korean','spanish','chinese']
-    # languages = ['turkish']
+    # languages = ['turkish','english','korean','spanish','chinese']
+    languages = ['turkish', 'english']
     
     results_file = './results/analysis_results.txt'
+    # Clean the results file before logging
+    open(results_file, 'w').close()
     logger = ResultsLogger(results_file)
 
     analyzers = []
 
-    metrics = [PESQStrategy()]
+    metrics = [ViSQOLStrategy()]
     degradation_types = [NoiseType()]
     
     # Create an instance of StatisticalAnalyzers

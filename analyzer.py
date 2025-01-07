@@ -8,7 +8,7 @@ class AudioQualityAnalyzer:
         self.language = language
         self.ref_dir = ref_dir
         self.deg_dir = deg_dir
-        self.degradation_levels = list(np.arange(-30, 61, 10))
+        self.degradation_levels = list(np.arange(-20, 61, 10))
         # self.degradation_levels = [-20,20,80]
 
         """
@@ -41,9 +41,12 @@ class AudioQualityAnalyzer:
         self.degradation_types.append(degradation_type)
 
     def analyze(self):
+        count = 0
         for file_name in os.listdir(self.ref_dir):
-            if not file_name.endswith('.wav'):
+            if not file_name.endswith('.wav') or count > 5:
                 continue
+
+            count += 1
                 
             print(f'Analyzing file: {file_name}')
             ref_path = os.path.join(self.ref_dir, file_name)
@@ -66,13 +69,11 @@ class AudioQualityAnalyzer:
                         try:
                             # Apply degradation
                             temp_ref_path = generate_degraded_signal(ref_path, deg_path, deg_type, level)
-                            _, deg = wavfile.read(deg_path)
-                            _, temp_ref = wavfile.read(temp_ref_path)
                             
                             # Calculate scores for all metrics
                             self.results[file_name][deg_type.name][level] = {}
                             for metric in self.metrics:
-                                score = metric.calculate_score(temp_ref, deg)
+                                score = metric.calculate_score(temp_ref_path, deg_path)
                                 self.results[file_name][deg_type.name][level][metric.name] = score
                                 print(f'{metric.name} Score: {score:.3f}')
                             
