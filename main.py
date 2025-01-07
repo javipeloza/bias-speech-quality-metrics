@@ -1,6 +1,6 @@
 from analyzer import AudioQualityAnalyzer
-from metrics import PESQStrategy, ViSQOLStrategy, ViSQOLMatLabStrategy
-from degradation_types import NoiseType
+from metrics import PESQStrategy, ViSQOLStrategy
+from degradation_types import BlueNoise, PinkNoise, NoisyCrowd
 from results_logger import ResultsLogger, plot_analysis_results, plot_statistical_results_table
 from file_manager import FileManager
 from statistical_analyzers import Anova
@@ -8,8 +8,8 @@ import os
 
 if __name__ == '__main__':
     # Directory paths
-    # languages = ['turkish','english','korean','spanish','chinese']
-    languages = ['turkish', 'english']
+    languages = ['turkish','english','korean','spanish','chinese']
+    # languages = ['turkish', 'english']
     
     results_file = './results/analysis_results.txt'
     # Clean the results file before logging
@@ -18,8 +18,8 @@ if __name__ == '__main__':
 
     analyzers = []
 
-    metrics = [ViSQOLStrategy()]
-    degradation_types = [NoiseType()]
+    metrics = [PESQStrategy(), ViSQOLStrategy()]
+    degradation_types = [BlueNoise(), PinkNoise(), NoisyCrowd()]
     
     # Create an instance of StatisticalAnalyzers
     statistical_analyzers = [Anova()]
