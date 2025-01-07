@@ -27,7 +27,7 @@ class PESQStrategy(MetricStrategy):
 class ViSQOLStrategy(MetricStrategy):
     @property
     def name(self):
-        return "ViSQOLMatLab"
+        return "ViSQOL"
 
     def calculate_score(self, ref_path, deg_path):
         fs = 16000  # Sampling rate for speech mode
