@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
 import os
+import json
+from analyzer import AudioQualityAnalyzer
 
 class ResultsLogger:
     def __init__(self, file_path):
@@ -31,14 +33,18 @@ class ResultsLogger:
                     
                     file.write("\n")
 
-def plot_analysis_results(analyzers, save_dir='./results'):
+def plot_analysis_results(analyzers, save_dir=None):
     """
     Create plots for each degradation type and metric combination
     
     Args:
         analyzers (list): List of AudioQualityAnalyzer objects
-        save_dir (str): Directory to save the plots
+        save_dir (str): Directory to save the plots (default: results directory)
     """
+    if save_dir is None:
+        results_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'results'))
+        save_dir = results_dir
+
     if not analyzers:
         return
 
@@ -47,24 +53,24 @@ def plot_analysis_results(analyzers, save_dir='./results'):
     metrics = analyzers[0].metrics
 
     # For each degradation type
-    for deg_type in degradation_types:
+    for deg_type_name in degradation_types:
         # For each metric
-        for metric in metrics:
+        for metric_name in metrics:
             plt.figure(figsize=(12, 6))
             
             # Plot each language's results
             for analyzer in analyzers:
-                levels, scores = analyzer.get_average_scores(deg_type.name, metric.name)
+                levels, scores = analyzer.get_average_scores(deg_type_name, metric_name)
                 if levels and scores:  # Only plot if we have data
                     plt.plot(levels, scores, marker='o', label=analyzer.language.capitalize())
             
-            plt.xlabel(f'{deg_type.name.capitalize()} Level')
-            plt.ylabel(f'{metric.name} Score')
+            plt.xlabel(f'{deg_type_name.capitalize()} Level')
+            plt.ylabel(f'{metric_name} Score')
             
             # Create title
             languages = [analyzer.language.capitalize() for analyzer in analyzers]
             languages_str = ' vs '.join(languages)
-            plt.title(f'{metric.name} Scores vs {deg_type.name.capitalize()} Level: {languages_str}')
+            plt.title(f'{metric_name} Scores vs {deg_type_name.capitalize()} Level: {languages_str}')
             
             plt.legend()
             plt.grid(True)
@@ -72,7 +78,7 @@ def plot_analysis_results(analyzers, save_dir='./results'):
             # Create filename
             languages_filename = '_'.join(analyzer.language.lower() for analyzer in analyzers)
             plt.savefig(
-                f'{save_dir}/{deg_type.name}_{metric.name.lower()}_comparison_{languages_filename}.png'
+                f'{save_dir}/{deg_type_name}_{metric_name.lower()}_comparison_{languages_filename}.png'
             )
             plt.close()
 
@@ -86,7 +92,8 @@ def plot_statistical_results_table(statistical_results, languages):
     """
     # Generate save path based on languages
     languages_filename = '_'.join(lang.lower() for lang in languages)
-    save_path = f'./results/statistical_results_table_{languages_filename}.png'
+    results_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'results'))
+    save_path = f'{results_dir}/statistical_results_table_{languages_filename}.png'
 
     metrics = list(statistical_results.keys())
     f_statistics = [statistical_results[metric]['F-statistic'] for metric in metrics]
@@ -116,14 +123,17 @@ def plot_statistical_results_table(statistical_results, languages):
     plt.savefig(save_path, bbox_inches='tight')
     plt.close()
 
-def plot_post_hoc_results(post_hoc_results, output_dir='results'):
+def plot_post_hoc_results(post_hoc_results, output_dir=None):
     """
     Save the post-hoc test results to a text file.
 
     Parameters:
     - post_hoc_results: Dictionary containing Tukey HSD test results for different metrics
-    - output_dir: The directory where the text file will be saved
+    - output_dir: The directory where the text file will be saved (default: results directory)
     """
+    if output_dir is None:
+        output_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'results'))
+
     # Generate the filename
     filename = f'{output_dir}/comprehensive_post_hoc_tests.txt'
 
@@ -144,15 +154,17 @@ def plot_post_hoc_results(post_hoc_results, output_dir='results'):
         file.write("- Positive mean diff indicates first group is higher\n")
         file.write("- Negative mean diff indicates second group is higher\n")
 
-
-def plot_pairwise_language_comparison(pairwise_comparison_results, output_dir='results'):
+def plot_pairwise_language_comparison(pairwise_comparison_results, output_dir=None):
     """
     Plot pairwise language comparison results in a table format.
 
     Parameters:
     - pairwise_comparison_results: Dictionary containing pairwise comparison results
-    - output_dir: Directory to save the plot
+    - output_dir: Directory to save the plot (default: results directory)
     """
+    if output_dir is None:
+        output_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'results'))
+
     # Ensure the output directory exists
     os.makedirs(output_dir, exist_ok=True)
 
@@ -204,14 +216,17 @@ def plot_pairwise_language_comparison(pairwise_comparison_results, output_dir='r
 
     print(f"Pairwise language comparison results plot saved to {save_path}")
 
-def plot_comprehensive_language_bias_analysis(comprehensive_results, output_dir='results'):
+def plot_comprehensive_language_bias_analysis(comprehensive_results, output_dir=None):
     """
     Plot comprehensive language bias analysis results in a table format.
 
     Parameters:
     - comprehensive_results: Dictionary containing comprehensive language bias analysis results
-    - output_dir: Directory to save the plot
+    - output_dir: Directory to save the plot (default: results directory)
     """
+    if output_dir is None:
+        output_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'results'))
+
     # Ensure the output directory exists
     os.makedirs(output_dir, exist_ok=True)
 
@@ -258,3 +273,62 @@ def plot_comprehensive_language_bias_analysis(comprehensive_results, output_dir=
     plt.close()
 
     print(f"Comprehensive language bias analysis results plot saved to {save_path}")
+
+def save_analyzers_to_json(analyzers, file_path):
+    """Save analyzers to a JSON file."""
+    with open(file_path, 'w') as json_file:
+        json.dump([{
+            'language': analyzer.language,
+            'ref_dir': analyzer.ref_dir,
+            'deg_dir': analyzer.deg_dir,
+            'degradation_types': [degradation_type.name for degradation_type in analyzer.degradation_types],
+            'metrics': [metric.name for metric in analyzer.metrics],
+            'skipped_files': analyzer.skipped_files,
+            'results': analyzer.results,
+        } for analyzer in analyzers], json_file)  # Save the analyzers array
+
+def save_analyzer_to_json(analyzer, file_path):
+    """Save analyzers to a JSON file."""
+    with open(file_path, 'w') as json_file:
+        json.dump({
+            'language': analyzer.language,
+            'ref_dir': analyzer.ref_dir,
+            'deg_dir': analyzer.deg_dir,
+            'degradation_types': [degradation_type.name for degradation_type in analyzer.degradation_types],
+            'metrics': [metric.name for metric in analyzer.metrics],
+            'skipped_files': analyzer.skipped_files,
+            'results': analyzer.results,
+        }, json_file)  # Save the analyzers array
+
+def json_to_analyzers(json_file):
+    """Load results from a JSON file into the analyzer."""
+    with open(json_file, 'r') as file:
+        data = json.load(file)
+
+    analyzers = []
+    
+    for entry in data:
+        # Create a new instance of AudioQualityAnalyzer using the loaded data
+        analyzer = AudioQualityAnalyzer(
+            language=entry['language'],
+            ref_dir=entry['ref_dir'],
+            deg_dir=entry['deg_dir']
+        )
+        
+        # Restore degradation types
+        for degradation_type in entry['degradation_types']:
+            # Assuming you have a way to reconstruct the degradation type instances
+            analyzer.add_degradation_type(degradation_type)  # Adjust as necessary
+
+        # Restore metrics
+        for metric in entry['metrics']:
+            # Assuming you have a way to reconstruct the metric instances
+            analyzer.add_metric(metric)  # Adjust as necessary
+
+        # Restore other attributes
+        analyzer.skipped_files = entry['skipped_files']
+        analyzer.results = entry['results']
+        
+        analyzers.append(analyzer)
+
+    return analyzers

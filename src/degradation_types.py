@@ -1,6 +1,9 @@
 from degrade import overlay_signal
+import os
 
 class DegradationType:
+    audio_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'audio'))
+
     @property
     def name(self):
         raise NotImplementedError("Must implement name property")
@@ -15,7 +18,7 @@ class BlueNoise(DegradationType):
         return "blue_noise"
 
     def apply_degradation(self, signal, snr):
-        noise_file_path = './audio/noise/blue_noise.wav'
+        noise_file_path = f'{self.audio_dir}/noise/blue_noise.wav'
         signal = overlay_signal(signal, snr, noise_file_path)
         return signal
     
@@ -25,7 +28,7 @@ class NoisyCrowd(DegradationType):
         return "noisy_crowd"
 
     def apply_degradation(self, signal, snr):
-        noise_file_path = './audio/noise/noisy_crowd_2.wav'
+        noise_file_path = f'{self.audio_dir}/noise/noisy_crowd_2.wav'
         signal = overlay_signal(signal, snr, noise_file_path)
         return signal
     
@@ -35,6 +38,6 @@ class PinkNoise(DegradationType):
         return "pink_noise"
 
     def apply_degradation(self, signal, snr):
-        noise_file_path = './audio/noise/pink_noise.wav'
+        noise_file_path = f'{self.audio_dir}/noise/pink_noise.wav'
         signal = overlay_signal(signal, snr, noise_file_path)
         return signal

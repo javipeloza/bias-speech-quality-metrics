@@ -80,15 +80,22 @@ class ViSQOLDockerStrategy(MetricStrategy):
         # Run the Docker command to calculate the ViSQOL score
         import subprocess
         command = [
-            "docker", "run", "-it", "-v", f"{os.getcwd()}/audio:/audio", 
+            "docker", "run", "-it", "-v", f"{os.path.dirname(os.getcwd())}/audio:/audio", 
             "mubtasimahasan/visqol:v3", 
             "--degraded_file", deg_path_resampled.lstrip('.').replace('\\', '/'),
             "--reference_file", ref_path_resampled.lstrip('.').replace('\\', '/')
         ]
+
+        # command = [
+        #     "docker", "run", "-it", "-v", f"{os.getcwd()}/audio:/audio", 
+        #     "mubtasimahasan/visqol:v3", 
+        #     "--degraded_file", deg_path_resampled.lstrip('.').replace('\\', '/'),
+        #     "--reference_file", ref_path_resampled.lstrip('.').replace('\\', '/')
+        # ]
 
         result = subprocess.run(command, capture_output=True, text=True)
 
         # Extract the score from the command output
         score_line = result.stdout.splitlines()[-1]  # Get the last line of the output
         score = float(score_line.split(':')[-1].strip())  # Extract the score after the colon and convert to float
-        return score 
+        return score

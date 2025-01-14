@@ -1,7 +1,7 @@
 from statsmodels.stats.multicomp import pairwise_tukeyhsd
 from scipy.stats import f_oneway
 import numpy as np
-from results_logger import plot_post_hoc_results, plot_pairwise_language_comparison, plot_comprehensive_language_bias_analysis
+from results_logger import plot_post_hoc_results, plot_pairwise_language_comparison, plot_comprehensive_language_bias_analysis, plot_statistical_results_table
 from itertools import combinations
 
 def perform_post_hoc_tests(aggregated_by_metric):
@@ -29,7 +29,6 @@ def perform_post_hoc_tests(aggregated_by_metric):
     plot_post_hoc_results(post_hoc_results)
 
     return post_hoc_results
-
 
 def pairwise_language_comparison(aggregated_by_metric):
     # Check if there are any metrics to compare
@@ -70,7 +69,6 @@ def pairwise_language_comparison(aggregated_by_metric):
     
     return pairwise_comparison_results
 
-
 def comprehensive_language_bias_analysis(aggregated_by_metric):
     results = {}
     
@@ -109,3 +107,10 @@ def comprehensive_language_bias_analysis(aggregated_by_metric):
     plot_comprehensive_language_bias_analysis(results)
     
     return results
+
+def analyze_statistical_results(statistical_analyzers, degradation_types, results, languages):
+    # Analyze results 
+    for statistical_analyzer in statistical_analyzers:
+        for degradation_type in degradation_types:
+            stats = statistical_analyzer.analyze(results, degradation_type.name, languages)
+            plot_statistical_results_table(stats, languages)

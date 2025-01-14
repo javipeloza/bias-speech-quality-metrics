@@ -9,3 +9,5 @@
 
 # Ignore the .idea folder
 /.idea/
+
+/src/__pycache__

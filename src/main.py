@@ -1,17 +1,22 @@
 from analyzer import AudioQualityAnalyzer
 from metrics import PESQStrategy, ViSQOLStrategy
 from degradation_types import BlueNoise, PinkNoise, NoisyCrowd
-from results_logger import ResultsLogger, plot_analysis_results, plot_statistical_results_table
+from results_logger import ResultsLogger, plot_analysis_results, save_analyzers_to_json, save_analyzer_to_json, json_to_analyzers
 from file_manager import FileManager
 from statistical_analyzers import Anova
+from statistics_util import analyze_statistical_results
 import os
 
 if __name__ == '__main__':
     # Directory paths
-    languages = ['turkish','english','korean','spanish','chinese']
+    languages = ['turkish','korean','english','chinese','spanish']
     # languages = ['turkish', 'english']
     
-    results_file = './results/analysis_results.txt'
+    # Get the absolute path to the results directory
+    results_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'results'))
+    audio_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'audio'))
+    results_file = os.path.join(results_dir, 'analysis_results.txt')
+
     # Clean the results file before logging
     open(results_file, 'w').close()
     logger = ResultsLogger(results_file)
@@ -25,8 +30,8 @@ if __name__ == '__main__':
     statistical_analyzers = [Anova()]
 
     for language in languages:
-        ref_dir = f"./audio/reference/{language}"
-        deg_dir = f"./audio/degraded/{language}"
+        ref_dir = os.path.join(audio_dir, 'reference', language)
+        deg_dir = os.path.join(audio_dir, 'degraded', language)
         temp_ref_dir = os.path.join(ref_dir, 'temp_ref')
 
         # Clean all files in the degraded directory
@@ -51,8 +56,28 @@ if __name__ == '__main__':
         
         # Log results
         logger.log_results(analyzer)
+
+        # Clean all files in the degraded directory
+        FileManager.clean_directory(deg_dir)
+
+        # Clean all files in the temp_ref directory
+        FileManager.clean_directory(temp_ref_dir)
+
+        # Custom file path for the analyzer using the language
+        analyzer_json_file_path = os.path.join(results_dir, f'analysis_results_{language}.json')
+
+        save_analyzer_to_json(analyzer, analyzer_json_file_path)
         
         analyzers.append(analyzer)
+
+    json_file_path = os.path.join(results_dir, 'analysis_results.json')
+
+    # Save analyzers to a JSON file
+    save_analyzers_to_json(analyzers, json_file_path)
+
+    print("Analyzer saved to json")
+
+    analyzers = json_to_analyzers(json_file_path)
 
     # Create comparative plot
     plot_analysis_results(analyzers)
@@ -60,7 +85,4 @@ if __name__ == '__main__':
     results = [analyzer.get_results() for analyzer in analyzers]
 
     # Analyze results 
-    for statistical_analyzer in statistical_analyzers:
-        for degradation_type in degradation_types:
-            stats = statistical_analyzer.analyze(results, degradation_type.name, languages)
-            plot_statistical_results_table(stats, languages)
+    analyze_statistical_results(statistical_analyzers, degradation_types, results, languages)

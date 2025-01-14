@@ -1,9 +1,7 @@
 from pydub import AudioSegment
-from pydub.generators import WhiteNoise
 from pydub.effects import low_pass_filter, high_pass_filter
 import numpy as np
 import os
-import librosa
 
 def encode_decode(signal, codec="pcm_alaw", temp_file_path="temp_audio.wav"):
     """

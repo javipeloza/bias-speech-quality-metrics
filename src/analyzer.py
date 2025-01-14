@@ -1,6 +1,5 @@
 import os
 import numpy as np
-from scipy.io import wavfile
 from degrade import generate_degraded_signal
 
 class AudioQualityAnalyzer:
@@ -8,8 +7,8 @@ class AudioQualityAnalyzer:
         self.language = language
         self.ref_dir = ref_dir
         self.deg_dir = deg_dir
-        self.degradation_levels = list(np.arange(-20, 41, 5))
-        # self.degradation_levels = [-20,20,80]
+        self.degradation_levels = list(np.arange(-25, 41, 5))
+        # self.degradation_levels = [-20,0]
 
         """
             results: {
@@ -44,7 +43,7 @@ class AudioQualityAnalyzer:
         for file_name in os.listdir(self.ref_dir):
             if not file_name.endswith('.wav'):
                 continue
-                
+
             print(f'Analyzing file: {file_name}')
             ref_path = os.path.join(self.ref_dir, file_name)
             self.results[file_name] = {}
@@ -57,7 +56,7 @@ class AudioQualityAnalyzer:
                     
                     # Test each degradation level
                     for level in self.degradation_levels:
-                        print(f'Degradation intensity: {level:.2f}')
+                        print(f'Degradation SNR: {level:.2f} dB')
                         deg_path = os.path.join(
                             self.deg_dir, 
                             f'deg_{deg_type.name}_{level}_{file_name}'
