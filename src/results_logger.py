@@ -288,17 +288,20 @@ def save_analyzers_to_json(analyzers, file_path):
         } for analyzer in analyzers], json_file)  # Save the analyzers array
 
 def save_analyzer_to_json(analyzer, file_path):
-    """Save analyzers to a JSON file."""
+    """Save analyzer to a JSON file as a dictionary."""
+    # Convert the analyzer object to a dictionary
+    json_data = {
+        'language': analyzer.language,
+        'ref_dir': analyzer.ref_dir,
+        'deg_dir': analyzer.deg_dir,
+        'degradation_types': [degradation_type.name for degradation_type in analyzer.degradation_types],
+        'metrics': [metric.name for metric in analyzer.metrics],
+        'skipped_files': analyzer.skipped_files,
+        'results': analyzer.results,
+    }  # Ensure the analyzer is saved as a dictionary
+
     with open(file_path, 'w') as json_file:
-        json.dump({
-            'language': analyzer.language,
-            'ref_dir': analyzer.ref_dir,
-            'deg_dir': analyzer.deg_dir,
-            'degradation_types': [degradation_type.name for degradation_type in analyzer.degradation_types],
-            'metrics': [metric.name for metric in analyzer.metrics],
-            'skipped_files': analyzer.skipped_files,
-            'results': analyzer.results,
-        }, json_file)  # Save the analyzers array
+        json.dump(json_data, json_file)  # Save the dictionary to JSON
 
 def json_to_analyzers(json_file):
     """Load results from a JSON file into the analyzer."""

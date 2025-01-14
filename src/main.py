@@ -66,7 +66,10 @@ if __name__ == '__main__':
         # Custom file path for the analyzer using the language
         analyzer_json_file_path = os.path.join(results_dir, f'analysis_results_{language}.json')
 
-        save_analyzer_to_json(analyzer, analyzer_json_file_path)
+        try:
+            save_analyzer_to_json(analyzer, analyzer_json_file_path)
+        except Exception as e:
+            print(f"Error saving analyzer for {language}: {e}")
         
         analyzers.append(analyzer)
 
