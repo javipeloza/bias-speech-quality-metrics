@@ -8,7 +8,7 @@ class AudioQualityAnalyzer:
         self.ref_dir = ref_dir
         self.deg_dir = deg_dir
         self.degradation_levels = list(np.arange(-25, 41, 5))
-        self.degradation_levels = [-20,0]
+        # self.degradation_levels = [-20,0]
 
         """
             results: {
@@ -40,12 +40,9 @@ class AudioQualityAnalyzer:
         self.degradation_types.append(degradation_type)
 
     def analyze(self):
-        count = 0
         for file_name in os.listdir(self.ref_dir):
-            if not file_name.endswith('.wav') or count > 0:
+            if not file_name.endswith('.wav'):
                 continue
-
-            count += 1 
 
             print(f'Analyzing file: {file_name}')
             ref_path = os.path.join(self.ref_dir, file_name)

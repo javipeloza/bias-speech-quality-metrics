@@ -335,3 +335,15 @@ def json_to_analyzers(json_file):
         analyzers.append(analyzer)
 
     return analyzers
+
+def save_analyzer_to_txt(analyzer, file_path):
+    """Save analyzer to a text file as a formatted string."""
+    with open(file_path, 'w') as file:
+        file.write(f"Language: {analyzer.language}\n")
+        file.write(f"Reference Directory: {analyzer.ref_dir}\n")
+        file.write(f"Degraded Directory: {analyzer.deg_dir}\n")
+        file.write(f"Degradation Types: {', '.join(degradation_type.name for degradation_type in analyzer.degradation_types)}\n")
+        file.write(f"Metrics: {', '.join(metric.name for metric in analyzer.metrics)}\n")
+        file.write(f"Skipped Files: {analyzer.skipped_files}\n")
+        file.write(f"Results: {analyzer.results}\n")
+        file.write("=" * 50 + "\n")

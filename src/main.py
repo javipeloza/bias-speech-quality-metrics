@@ -1,7 +1,7 @@
 from analyzer import AudioQualityAnalyzer
 from metrics import PESQStrategy, ViSQOLStrategy
 from degradation_types import BlueNoise, PinkNoise, NoisyCrowd
-from results_logger import ResultsLogger, plot_analysis_results, save_analyzers_to_json, save_analyzer_to_json, json_to_analyzers
+from results_logger import ResultsLogger, plot_analysis_results, save_analyzers_to_json, save_analyzer_to_txt, save_analyzer_to_json, json_to_analyzers
 from file_manager import FileManager
 from statistical_analyzers import Anova
 from statistics_util import analyze_statistical_results
@@ -65,8 +65,10 @@ if __name__ == '__main__':
 
         # Custom file path for the analyzer using the language
         analyzer_json_file_path = os.path.join(results_dir, f'analysis_results_{language}.json')
+        analyzer_txt_file_path = os.path.join(results_dir, f'analysis_results_{language}.txt')
 
         try:
+            save_analyzer_to_txt(analyzer, analyzer_txt_file_path)
             save_analyzer_to_json(analyzer, analyzer_json_file_path)
         except Exception as e:
             print(f"Error saving analyzer for {language}: {e}")

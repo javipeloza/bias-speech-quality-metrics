@@ -39,5 +39,5 @@ class PinkNoise(DegradationType):
 
     def apply_degradation(self, signal, snr):
         noise_file_path = f'{self.audio_dir}/noise/pink_noise.wav'
-        signal = overlay_signal(signal, snr, noise_file_path)
+        signal =    (signal, snr, noise_file_path)
         return signal
