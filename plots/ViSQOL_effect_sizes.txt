@@ -1,0 +1,17 @@
+Effect Sizes (Cohen's d) for ViSQOL Scores
+==================================================
+English vs Turkish:
+Cohen's d: -0.1780
+
+English vs Korean:
+Cohen's d: -0.0389
+
+English vs Chinese:
+Cohen's d: 0.0122
+
+English vs Spanish:
+Cohen's d: -0.0200
+
+Turkish vs Korean:
+Cohen's d: 0.1369
+

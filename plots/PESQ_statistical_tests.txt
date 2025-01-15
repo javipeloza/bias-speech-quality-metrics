@@ -1,0 +1,7 @@
+Statistical Tests for PESQ Scores
+========================================
+ANOVA Test:
+F-statistic: 0.1236, p-value: 9.7385e-01
+
+Kruskal-Wallis Test:
+H-statistic: 1.4009, p-value: 8.4404e-01

@@ -1,0 +1,17 @@
+Effect Sizes (Cohen's d) for PESQ Scores
+==================================================
+English vs Turkish:
+Cohen's d: -0.0219
+
+English vs Korean:
+Cohen's d: 0.1107
+
+English vs Chinese:
+Cohen's d: -0.0246
+
+English vs Spanish:
+Cohen's d: -0.0005
+
+Turkish vs Korean:
+Cohen's d: 0.1380
+
