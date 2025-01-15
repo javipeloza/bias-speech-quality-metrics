@@ -498,20 +498,42 @@ def plot_score_distribution_boxplots(data, output_dir='plots'):
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
     
     # Plot PESQ scores
-    ax1.boxplot([pesq_scores[lang] for lang in pesq_scores.keys()],
+    box_pesq = ax1.boxplot([pesq_scores[lang] for lang in pesq_scores.keys()],
                 labels=[lang.capitalize() for lang in pesq_scores.keys()])
     ax1.set_ylabel('PESQ Score')
     ax1.set_title('PESQ Score Distribution by Language')
     ax1.grid(True, linestyle='--', alpha=0.7)
     ax1.set_ylim(1, 5)
     
+    # Set the median line color to blue for PESQ
+    for median in box_pesq['medians']:
+        median.set_color('blue')
+    
+    # Mark the mean with a triangle for PESQ (black)
+    for i, lang in enumerate(pesq_scores.keys(), 1):
+        mean_val = np.mean(pesq_scores[lang])
+        ax1.plot(i, mean_val, marker='^', color='black', markersize=8)  # Triangle for mean
+    
     # Plot ViSQOL scores
-    ax2.boxplot([visqol_scores[lang] for lang in visqol_scores.keys()],
+    box_visqol = ax2.boxplot([visqol_scores[lang] for lang in visqol_scores.keys()],
                 labels=[lang.capitalize() for lang in visqol_scores.keys()])
     ax2.set_ylabel('ViSQOL Score')
     ax2.set_title('ViSQOL Score Distribution by Language')
     ax2.grid(True, linestyle='--', alpha=0.7)
     ax2.set_ylim(1, 5)
+    
+    # Set the median line color to blue for ViSQOL
+    for median in box_visqol['medians']:
+        median.set_color('blue')
+    
+    # Mark the mean with a triangle for ViSQOL (black)
+    for i, lang in enumerate(visqol_scores.keys(), 1):
+        mean_val = np.mean(visqol_scores[lang])
+        ax2.plot(i, mean_val, marker='^', color='black', markersize=8)  # Triangle for mean
+        
+        # Draw a vertical line for the minimum value of ViSQOL
+        min_val = np.min(visqol_scores[lang])
+        ax2.plot([i, i], [1, min_val], color='blue', linestyle='-', linewidth=1.5)  # Min value line
     
     # Add a main title
     fig.suptitle('Score Distributions Across Languages', fontsize=14, y=1.05)
@@ -521,6 +543,7 @@ def plot_score_distribution_boxplots(data, output_dir='plots'):
     plt.savefig(os.path.join(output_dir, 'score_distributions.png'),
                 bbox_inches='tight', dpi=300)
     plt.close()
+
 
 def plot_score_distributions_by_noise(data, output_dir='plots'):
     """
@@ -555,21 +578,43 @@ def plot_score_distributions_by_noise(data, output_dir='plots'):
     # Plot PESQ scores (top row)
     for idx, noise_type in enumerate(noise_types):
         ax = axes[0, idx]
-        ax.boxplot([pesq_scores[noise_type][lang] for lang in data.keys()],
-                  labels=[lang.capitalize() for lang in data.keys()])
+        box_pesq = ax.boxplot([pesq_scores[noise_type][lang] for lang in data.keys()],
+                              labels=[lang.capitalize() for lang in data.keys()])
         ax.set_ylabel('PESQ Score' if idx == 0 else '')
         ax.set_title(f'{noise_type.replace("_", " ").title()}')
         ax.grid(True, linestyle='--', alpha=0.7)
         ax.set_ylim(1, 5)
+        
+        # Set the median line color to blue for PESQ
+        for median in box_pesq['medians']:
+            median.set_color('blue')
+        
+        # Mark the mean with a triangle (black) for PESQ
+        for i, lang in enumerate(data.keys(), 1):
+            mean_val = np.mean(pesq_scores[noise_type][lang])
+            ax.plot(i, mean_val, marker='^', color='black', markersize=8)  # Triangle for mean
     
     # Plot ViSQOL scores (bottom row)
     for idx, noise_type in enumerate(noise_types):
         ax = axes[1, idx]
-        ax.boxplot([visqol_scores[noise_type][lang] for lang in data.keys()],
-                  labels=[lang.capitalize() for lang in data.keys()])
+        box_visqol = ax.boxplot([visqol_scores[noise_type][lang] for lang in data.keys()],
+                               labels=[lang.capitalize() for lang in data.keys()])
         ax.set_ylabel('ViSQOL Score' if idx == 0 else '')
         ax.grid(True, linestyle='--', alpha=0.7)
         ax.set_ylim(1, 5)
+        
+        # Set the median line color to blue for ViSQOL
+        for median in box_visqol['medians']:
+            median.set_color('blue')
+        
+        # Mark the mean with a triangle (black) for ViSQOL
+        for i, lang in enumerate(data.keys(), 1):
+            mean_val = np.mean(visqol_scores[noise_type][lang])
+            ax.plot(i, mean_val, marker='^', color='black', markersize=8)  # Triangle for mean
+            
+            # Draw a vertical line for the minimum value of ViSQOL
+            min_val = np.min(visqol_scores[noise_type][lang])
+            ax.plot([i, i], [1, min_val], color='blue', linestyle='-', linewidth=1.5)  # Min value line
     
     # Add row labels
     fig.text(0.08, 0.75, 'PESQ Scores', rotation=90, fontsize=12)
@@ -749,7 +794,7 @@ def plot_average_scores_by_snr(data, output_dir='plots'):
     plt.style.use('default')
     
     # Define SNR levels and noise types
-    snr_levels = ['-20', '-15', '-10', '-5', '0', '5', '10', '15', '20', '25', '30', '35', '40']
+    snr_levels = ['-25', '-20', '-15', '-10', '-5', '0', '5', '10', '15', '20', '25', '30', '35', '40']
     noise_types = ['blue_noise', 'pink_noise', 'noisy_crowd']
     languages = list(data.keys())
     
@@ -869,7 +914,7 @@ def plot_radar_charts(data, output_dir='plots'):
     
     # Define categories and prepare data
     noise_types = ['blue_noise', 'pink_noise', 'noisy_crowd']
-    snr_levels = ['-20', '-15', '-10', '-5', '0', '5', '10', '15', '20', '25', '30', '35', '40']
+    snr_levels = ['-25', '-20', '-15', '-10', '-5', '0', '5', '10', '15', '20', '25', '30', '35', '40']
     languages = list(data.keys())
     
     # Calculate average scores for each language, noise type, and SNR level
@@ -1015,7 +1060,7 @@ def plot_pca_clusters(data, output_dir='plots'):
 
     # Define noise types and SNR levels
     noise_types = ['blue_noise', 'pink_noise', 'noisy_crowd']
-    snr_levels = ['-20', '-15', '-10', '-5', '0', '5', '10', '15', '20', '25', '30', '35', '40']
+    snr_levels = ['-25', '-20', '-15', '-10', '-5', '0', '5', '10', '15', '20', '25', '30', '35', '40']
     languages = list(data.keys())
 
     # Prepare the data matrix
@@ -1106,7 +1151,7 @@ def plot_score_differences(data, baseline_language='english', output_dir='plots'
     
     # Define noise types and SNR levels
     noise_types = ['blue_noise', 'pink_noise', 'noisy_crowd']
-    snr_levels = ['-20', '-15', '-10', '-5', '0', '5', '10', '15', '20', '25', '30', '35', '40']
+    snr_levels = ['-25', '-20', '-15', '-10', '-5', '0', '5', '10', '15', '20', '25', '30', '35', '40']
     languages = list(data.keys())
     
     # Ensure the baseline language is in the data
@@ -1229,7 +1274,7 @@ def plot_relative_performance_ratios(data, target_languages, baseline_language='
     
     # Define noise types and SNR levels
     noise_types = ['blue_noise', 'pink_noise', 'noisy_crowd']
-    snr_levels = ['-20', '-15', '-10', '-5', '0', '5', '10', '15', '20', '25', '30', '35', '40']
+    snr_levels = ['-25', '-20', '-15', '-10', '-5', '0', '5', '10', '15', '20', '25', '30', '35', '40']
     
     # Ensure the baseline language is in the data
     if baseline_language not in data:
@@ -1349,7 +1394,7 @@ def conduct_statistical_tests(data, output_dir='results'):
     
     # Define noise types and SNR levels
     noise_types = ['blue_noise', 'pink_noise', 'noisy_crowd']
-    snr_levels = ['-20', '-15', '-10', '-5', '0', '5', '10', '15', '20', '25', '30', '35', '40']
+    snr_levels = ['-25', '-20', '-15', '-10', '-5', '0', '5', '10', '15', '20', '25', '30', '35', '40']
     languages = list(data.keys())
     
     # Prepare data for statistical tests
@@ -1435,7 +1480,7 @@ def perform_pairwise_tests(data, languages_to_compare, test_type='t-test', outpu
     
     # Define noise types and SNR levels
     noise_types = ['blue_noise', 'pink_noise', 'noisy_crowd']
-    snr_levels = ['-20', '-15', '-10', '-5', '0', '5', '10', '15', '20', '25', '30', '35', '40']
+    snr_levels = ['-25', '-20', '-15', '-10', '-5', '0', '5', '10', '15', '20', '25', '30', '35', '40']
     
     # Prepare data for pairwise tests
     def collect_scores(metric):
@@ -1545,7 +1590,7 @@ def compute_effect_sizes(data, languages_to_compare, output_dir='results'):
     """
     # Define noise types and SNR levels
     noise_types = ['blue_noise', 'pink_noise', 'noisy_crowd']
-    snr_levels = ['-20', '-15', '-10', '-5', '0', '5', '10', '15', '20', '25', '30', '35', '40']
+    snr_levels = ['-25', '-20', '-15', '-10', '-5', '0', '5', '10', '15', '20', '25', '30', '35', '40']
     
     # Prepare data for effect size computation
     def collect_scores(metric):
@@ -1648,7 +1693,7 @@ def plot_average_scores_by_snr_level(data, output_dir='plots'):
     
     # Define noise types and SNR levels
     noise_types = ['blue_noise', 'pink_noise', 'noisy_crowd']
-    snr_levels = ['-20', '-15', '-10', '-5', '0', '5', '10', '15', '20', '25', '30', '35', '40']
+    snr_levels = ['-25', '-20', '-15', '-10', '-5', '0', '5', '10', '15', '20', '25', '30', '35', '40']
     languages = list(data.keys())
     
     # Prepare data for plotting
@@ -1722,7 +1767,7 @@ def plot_median_scores_by_snr_level(data, output_dir='plots'):
     
     # Define noise types and SNR levels
     noise_types = ['blue_noise', 'pink_noise', 'noisy_crowd']
-    snr_levels = ['-20', '-15', '-10', '-5', '0', '5', '10', '15', '20', '25', '30', '35', '40']
+    snr_levels = ['-25', '-20', '-15', '-10', '-5', '0', '5', '10', '15', '20', '25', '30', '35', '40']
     languages = list(data.keys())
     
     # Prepare data for plotting
@@ -1795,7 +1840,7 @@ def plot_gender_based_scatter(data, output_dir='plots'):
     plt.style.use('default')
     
     # Define SNR levels
-    snr_levels = ['-20', '-15', '-10', '-5', '0', '5', '10', '15', '20', '25', '30', '35', '40']
+    snr_levels = ['-25', '-20', '-15', '-10', '-5', '0', '5', '10', '15', '20', '25', '30', '35', '40']
     languages = list(data.keys())
     
     # Define colors for gender
@@ -1939,3 +1984,313 @@ def plot_metric_correlation_by_gender(data, output_dir='plots'):
         os.makedirs(output_dir, exist_ok=True)
         plt.savefig(os.path.join(output_dir, f'{language}_metric_correlation_gender_scatter.png'), bbox_inches='tight', dpi=300)
         plt.close()
+
+
+def plot_pesq_visqol_overlay(data, output_dir='plots'):
+    """
+    Creates overlay plots of PESQ and ViSQOL scores across different SNR levels for each language.
+    
+    Args:
+        data (dict): Dictionary of languages containing analysis results
+        output_dir (str): Directory to save the plots
+    """
+    # Create output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # Set style for better visualization
+    plt.style.use('default')
+    
+    # Define noise types and their colors
+    noise_colors = [
+        ('blue_noise', 'blue'),
+        ('pink_noise', 'pink'),
+        ('noisy_crowd', 'red')
+    ]
+    
+    # Process each language
+    for language in data.keys():
+        # Create figure and axis
+        fig, ax1 = plt.subplots(figsize=(12, 7))
+        ax2 = ax1.twinx()  # Create second y-axis for ViSQOL
+        
+        # Get the first (and only) audio file for this language
+        audio_file = list(data[language].keys())[0]
+        
+        # Process data for each noise type
+        for noise_type, color in noise_colors:
+            if noise_type not in data[language][audio_file]:
+                continue
+                
+            # Extract SNR levels and scores
+            snr_levels = []
+            pesq_scores = []
+            visqol_scores = []
+            
+            for snr in data[language][audio_file][noise_type].keys():
+                snr_levels.append(float(snr))
+                pesq_scores.append(data[language][audio_file][noise_type][snr]['PESQ'])
+                visqol_scores.append(data[language][audio_file][noise_type][snr]['ViSQOL'])
+            
+            # Sort by SNR levels
+            snr_scores = sorted(zip(snr_levels, pesq_scores, visqol_scores))
+            snr_levels, pesq_scores, visqol_scores = zip(*snr_scores)
+            
+            # Plot PESQ scores on first y-axis
+            line1 = ax1.plot(snr_levels, pesq_scores, marker='o', 
+                            label=f'PESQ ({noise_type})',
+                            color=color, linestyle='-', linewidth=2, markersize=6)
+            
+            # Plot ViSQOL scores on second y-axis
+            line2 = ax2.plot(snr_levels, visqol_scores, marker='s',
+                            label=f'ViSQOL ({noise_type})',
+                            color=color, linestyle='--', linewidth=2, markersize=6)
+            
+        ax1.set_ylim(1, 5)
+        ax2.set_ylim(1, 5)
+        
+        # Customize the plot
+        ax1.set_xlabel('SNR (dB)', fontsize=12)
+        ax1.set_ylabel('PESQ Score', fontsize=12, color='darkblue')
+        ax2.set_ylabel('ViSQOL Score', fontsize=12, color='darkred')
+        
+        # Set title with language
+        plt.title(f'PESQ and ViSQOL Scores vs SNR - {language.upper()}', 
+                 fontsize=14, pad=20)
+        
+        # Add grid
+        ax1.grid(True, linestyle='--', alpha=0.3)
+        
+        # Combine legends from both axes
+        lines1, labels1 = ax1.get_legend_handles_labels()
+        lines2, labels2 = ax2.get_legend_handles_labels()
+        ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper left')
+        
+        # Adjust layout to prevent label cutoff
+        plt.tight_layout()
+        
+        # Save the plot
+        output_path = os.path.join(output_dir, f'metrics_overlay_{language}.png')
+        plt.savefig(output_path, bbox_inches='tight', dpi=300)
+        plt.close()
+
+
+def metrics_overlay_average(data, output_dir='plots'):
+    """
+    Creates overlay plots of averaged PESQ and ViSQOL scores across different SNR levels for each language.
+    The scores are averaged across all noise types for each SNR level.
+    
+    Args:
+        data (dict): Dictionary of languages containing analysis results
+        output_dir (str): Directory to save the plots
+    """
+    # Create output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # Set style for better visualization
+    plt.style.use('default')
+    
+    # Define noise types
+    noise_types = ['blue_noise', 'pink_noise', 'noisy_crowd']
+    
+    # Process each language
+    for language in data.keys():
+        # Create figure and axis
+        fig, ax1 = plt.subplots(figsize=(12, 7))
+        ax2 = ax1.twinx()  # Create second y-axis for ViSQOL
+        
+        # Get the first (and only) audio file for this language
+        audio_file = list(data[language].keys())[0]
+        
+        # Initialize dictionaries to store values for averaging
+        snr_pesq = {}
+        snr_visqol = {}
+        
+        # Collect all values for each SNR level
+        for noise_type in noise_types:
+            if noise_type not in data[language][audio_file]:
+                continue
+                
+            for snr in data[language][audio_file][noise_type].keys():
+                if snr not in snr_pesq:
+                    snr_pesq[snr] = []
+                    snr_visqol[snr] = []
+                
+                snr_pesq[snr].append(data[language][audio_file][noise_type][snr]['PESQ'])
+                snr_visqol[snr].append(data[language][audio_file][noise_type][snr]['ViSQOL'])
+        
+        # Calculate averages and prepare for plotting
+        snr_levels = []
+        pesq_averages = []
+        visqol_averages = []
+        
+        for snr in sorted(snr_pesq.keys(), key=float):
+            snr_levels.append(float(snr))
+            pesq_averages.append(np.mean(snr_pesq[snr]))
+            visqol_averages.append(np.mean(snr_visqol[snr]))
+        
+        # Plot average PESQ scores on first y-axis
+        line1 = ax1.plot(snr_levels, pesq_averages, marker='o', 
+                        label='PESQ (average)',
+                        color='darkblue', linestyle='-', linewidth=2, markersize=6)
+        
+        # Plot average ViSQOL scores on second y-axis
+        line2 = ax2.plot(snr_levels, visqol_averages, marker='s',
+                        label='ViSQOL (average)',
+                        color='darkred', linestyle='--', linewidth=2, markersize=6)
+        
+        # Set y-axis limits from 1 to 5
+        ax1.set_ylim(1, 5)
+        ax2.set_ylim(1, 5)
+        
+        # Customize the plot
+        ax1.set_xlabel('SNR (dB)', fontsize=12)
+        ax1.set_ylabel('PESQ Score', fontsize=12, color='darkblue')
+        ax2.set_ylabel('ViSQOL Score', fontsize=12, color='darkred')
+        
+        # Set title with language
+        plt.title(f'Average PESQ and ViSQOL Scores vs SNR - {language.upper()}', 
+                 fontsize=14, pad=20)
+        
+        # Add grid
+        ax1.grid(True, linestyle='--', alpha=0.3)
+        
+        # Combine legends from both axes
+        lines1, labels1 = ax1.get_legend_handles_labels()
+        lines2, labels2 = ax2.get_legend_handles_labels()
+        ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper left')
+        
+        # Adjust layout to prevent label cutoff
+        plt.tight_layout()
+        
+        # Save the plot
+        output_path = os.path.join(output_dir, f'metrics_overlay_average_{language}.png')
+        plt.savefig(output_path, bbox_inches='tight', dpi=300)
+        plt.close()
+
+import os
+import numpy as np
+import matplotlib.pyplot as plt
+
+def plot_scores_by_noise_type(data, output_dir='plots'):
+    """
+    Creates one plot per noise type, showing two lines for each language
+    (PESQ and ViSQOL) aggregated at each SNR level.
+    
+    Args:
+        data (dict): Dictionary of languages containing analysis results
+        output_dir (str): Directory to save the plots
+    """
+    # Create output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # Define noise types and their colors for better visualization
+    noise_types = ['blue_noise', 'pink_noise', 'noisy_crowd']
+    
+    # Process each noise type separately
+    for noise_type in noise_types:
+        # Create figure and axis
+        plt.figure(figsize=(12, 7))
+        
+        # Iterate over languages to plot PESQ and ViSQOL lines
+        for language, language_data in data.items():
+            snr_pesq = {}
+            snr_visqol = {}
+            
+            # Aggregate data by SNR for the current noise type
+            for audio_file, audio_data in language_data.items():
+                if noise_type in audio_data:
+                    for snr, scores in audio_data[noise_type].items():
+                        if snr not in snr_pesq:
+                            snr_pesq[snr] = []
+                            snr_visqol[snr] = []
+                        
+                        snr_pesq[snr].append(scores['PESQ'])
+                        snr_visqol[snr].append(scores['ViSQOL'])
+            
+            # Prepare data for plotting
+            snr_levels = []
+            pesq_averages = []
+            visqol_averages = []
+            
+            for snr in sorted(snr_pesq.keys(), key=float):
+                snr_levels.append(float(snr))
+                pesq_averages.append(np.mean(snr_pesq[snr]))
+                visqol_averages.append(np.mean(snr_visqol[snr]))
+            
+            # Plot PESQ and ViSQOL lines for the current language
+            plt.plot(snr_levels, pesq_averages, label=f'{language} - PESQ', marker='o', linestyle='-')
+            plt.plot(snr_levels, visqol_averages, label=f'{language} - ViSQOL', marker='s', linestyle='--')
+        
+        # Customize the plot
+        plt.title(f'PESQ and ViSQOL Scores by Language vs SNR ({noise_type.replace("_", " ").title()})', fontsize=16)
+        plt.xlabel('SNR (dB)', fontsize=14)
+        plt.ylabel('Score', fontsize=14)
+        plt.ylim(1, 5)
+        plt.grid(True, linestyle='--', alpha=0.6)
+        plt.legend(loc='upper left', fontsize=10, title='Languages')
+        
+        # Save the plot
+        output_path = os.path.join(output_dir, f'metrics_by_language_{noise_type}.png')
+        plt.tight_layout()
+        plt.savefig(output_path, bbox_inches='tight', dpi=300)
+        plt.close()
+
+
+def compute_score_differences_for_languages(data, lang1, lang2, snr_range=list(range(0,31))):
+    """
+    Computes the differences between PESQ and ViSQOL scores for two specified languages
+    across a given SNR range.
+    
+    Args:
+        data (dict): Parsed JSON data containing the analysis results.
+        lang1 (str): The first language.
+        lang2 (str): The second language.
+        snr_range (list): A list of SNR levels to consider (e.g., ['-20', '0', '5']).
+    
+    Returns:
+        list: A list of differences in scores for each SNR level for the two languages.
+              Each element is a tuple of (snr, difference).
+    """
+    # Define noise types
+    noise_types = ['blue_noise', 'pink_noise', 'noisy_crowd']
+    
+    # Helper function to collect average scores for a given metric (PESQ or ViSQOL)
+    def collect_average_scores(metric):
+        averages_by_language = {lang: {snr: [] for snr in snr_range} for lang in [lang1, lang2]}
+        
+        for language in [lang1, lang2]:
+            audio_file = list(data[language].keys())[0]  # Assuming one audio file per language
+            for snr in snr_range:
+                scores = []
+                for noise_type in noise_types:
+                    try:
+                        scores.append(data[language][audio_file][noise_type][snr][metric])
+                    except KeyError:
+                        continue
+                averages_by_language[language][snr] = np.mean(scores) if scores else np.nan
+        
+        return averages_by_language
+    
+    # Collect average PESQ and ViSQOL scores for the specified languages and SNR range
+    pesq_averages_by_language = collect_average_scores('PESQ')
+    visqol_averages_by_language = collect_average_scores('ViSQOL')
+    
+    # Compute the differences between PESQ and ViSQOL for the two languages and given SNR range
+    differences = []
+    
+    for snr in snr_range:
+        pesq_lang1 = pesq_averages_by_language[lang1][snr]
+        pesq_lang2 = pesq_averages_by_language[lang2][snr]
+        visqol_lang1 = visqol_averages_by_language[lang1][snr]
+        visqol_lang2 = visqol_averages_by_language[lang2][snr]
+        
+        # Compute the difference (PESQ - ViSQOL) for both languages
+        if not np.isnan(pesq_lang1) and not np.isnan(visqol_lang1) and not np.isnan(pesq_lang2) and not np.isnan(visqol_lang2):
+            diff_lang1 = pesq_lang1 - visqol_lang1
+            diff_lang2 = pesq_lang2 - visqol_lang2
+            difference = (snr, diff_lang1, diff_lang2)
+            differences.append(difference)
+        else:
+            differences.append((snr, np.nan, np.nan))
+    
+    return differences

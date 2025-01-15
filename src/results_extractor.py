@@ -1,6 +1,6 @@
 import json
 import os
-from results_logger import plot_metrics_by_language, plot_metric_correlation, plot_score_distribution_boxplots, plot_score_distributions_by_noise, plot_score_density_distributions, plot_score_heatmaps, plot_average_scores_by_snr, plot_radar_charts, plot_pca_clusters, plot_score_differences, plot_relative_performance_ratios, conduct_statistical_tests, perform_pairwise_tests, compute_effect_sizes, plot_average_scores_by_snr_level, plot_median_scores_by_snr_level, plot_gender_based_scatter, plot_metric_correlation_by_gender
+from results_logger import plot_metrics_by_language, plot_metric_correlation, plot_score_distribution_boxplots, plot_score_distributions_by_noise, plot_score_density_distributions, plot_score_heatmaps, plot_average_scores_by_snr, plot_radar_charts, plot_pca_clusters, plot_score_differences, plot_relative_performance_ratios, conduct_statistical_tests, perform_pairwise_tests, compute_effect_sizes, plot_average_scores_by_snr_level, plot_median_scores_by_snr_level, plot_gender_based_scatter, plot_metric_correlation_by_gender, plot_pesq_visqol_overlay, metrics_overlay_average, plot_scores_by_noise_type, compute_score_differences_for_languages
 
 def extract_json_data(file_path):
     """
@@ -29,22 +29,34 @@ if __name__ == '__main__':
     results = extract_json_data(results_path)
     
     if results:
+        # differences = compute_score_differences_for_languages(results, 'english', 'turkish')
         # plot_metrics_by_language(results)
-        plot_metric_correlation(results)
+        # plot_metric_correlation(results)
         # plot_score_distribution_boxplots(results)
         # plot_score_distributions_by_noise(results)
-        # plot_score_density_distributions(results)
+        plot_score_density_distributions(results)
         # plot_score_heatmaps(results)
         # plot_average_scores_by_snr(results)
+        # plot_median_scores_by_snr_level(results)
         # plot_radar_charts(results)
         # plot_pca_clusters(results)
         # plot_score_differences(results)
+
+        # 0.23 + 0.4 + 0.35 + 0.45 + 0.38 + 0.3 (0 to 25 dB)
+
         # plot_relative_performance_ratios(results, ['turkish', 'korean', 'spanish', 'chinese'])
+        # plot_relative_performance_ratios(results, ['turkish', 'korean'])
+
+        # perform_pairwise_tests(results, [('english', 'turkish'), ('english', 'korean'), ('english', 'chinese'), ('english', 'spanish'), ('turkish', 'korean'), ('chinese', 'korean'), ('chinese', 'turkish')])
+        # compute_effect_sizes(results, [('english', 'turkish'), ('english', 'korean'), ('english', 'chinese'), ('english', 'spanish'), ('turkish', 'korean'), ('chinese', 'korean'), ('chinese', 'turkish')])
+        # perform_pairwise_tests(results, [('english', 'turkish'), ('english', 'korean'), ('turkish', 'korean')])
+        # compute_effect_sizes(results, [('english', 'turkish'), ('english', 'korean'), ('turkish', 'korean')])
+
         # conduct_statistical_tests(results)
-        # perform_pairwise_tests(results, [('english', 'turkish'), ('english', 'korean'), ('english', 'chinese'), ('english', 'spanish'), ('turkish', 'korean')])
-        # compute_effect_sizes(results, [('english', 'turkish'), ('english', 'korean'), ('english', 'chinese'), ('english', 'spanish'), ('turkish', 'korean')])
         # plot_average_scores_by_snr_level(results)
-        # plot_median_scores_by_snr_level(results)
         # plot_gender_based_scatter(results)
-        plot_metric_correlation_by_gender(results)
+        # plot_metric_correlation_by_gender(results)
+        # plot_pesq_visqol_overlay(results)
+        # metrics_overlay_average(results)
+        # plot_scores_by_noise_type(results)
         print("Plots have been saved in the 'plots' directory.")
