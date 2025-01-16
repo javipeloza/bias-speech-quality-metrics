@@ -1,0 +1,89 @@
+ANOVA Analysis Results
+=======================
+
+One-way ANOVA: Language Effects on PESQ
+=====================================
+
+Average PESQ Scores by Language:
+  english: 2.4137
+  korean: 2.2905
+  turkish: 2.4405
+
+PESQ ANOVA Results:
+  F-statistic: 0.2073
+  p-value: 0.8130
+  Significance threshold: 0.05
+  Significant: No
+
+Average ViSQOL Scores by Language:
+  english: 2.9410
+  korean: 2.9877
+  turkish: 3.1331
+
+ViSQOL ANOVA Results:
+  F-statistic: 0.2337
+  p-value: 0.7919
+  Significance threshold: 0.05
+  Significant: No
+
+Two-way ANOVA: Language and Noise Type Effects on PESQ
+=====================================
+
+Average PESQ Scores by Noise Type:
+  Blue Noise: 2.3473
+  Pink Noise: 2.3663
+  Noisy Crowd: 2.4312
+
+PESQ Two-way ANOVA Results:
+  F-statistic: 0.0627
+  p-value: 0.9393
+  Significance threshold: 0.05
+  Significant: No
+
+Average ViSQOL Scores by Noise Type:
+  Blue Noise: 2.7827
+  Pink Noise: 2.8599
+  Noisy Crowd: 3.4192
+
+ViSQOL Two-way ANOVA Results:
+  F-statistic: 2.9322
+  p-value: 0.0570
+  Significance threshold: 0.05
+  Significant: No
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tukey's Honest Significant Difference (HSD) Test Results with Bonferroni Correction
+=========================================================
+Bonferroni corrected p-values and significance after correction:
+            group1             group2  meandiff  p-adj   lower   upper  reject  corrected_p-adj  significant_after_correction
+englishnoisy_crowd   koreanblue_noise   -0.6784 0.0000 -1.0555 -0.3013    True         0.000034                          True
+englishnoisy_crowd   koreanpink_noise   -0.6163 0.0000 -0.9934 -0.2392    True         0.000539                          True
+englishnoisy_crowd  turkishblue_noise   -0.7121 0.0000 -1.0892 -0.3350    True         0.000007                          True
+englishnoisy_crowd  turkishpink_noise   -0.6431 0.0000 -1.0203 -0.2660    True         0.000169                          True
+  koreanblue_noise  koreannoisy_crowd    0.5788 0.0001  0.2017  0.9560    True         0.002530                          True
+  koreanblue_noise turkishnoisy_crowd    0.5636 0.0001  0.1865  0.9407    True         0.004611                          True
+ koreannoisy_crowd   koreanpink_noise   -0.5168 0.0007 -0.8939 -0.1397    True         0.026450                          True
+ koreannoisy_crowd  turkishblue_noise   -0.6126 0.0000 -0.9897 -0.2355    True         0.000632                          True
+ koreannoisy_crowd  turkishpink_noise   -0.5436 0.0003 -0.9207 -0.1665    True         0.009917                          True
+  koreanpink_noise turkishnoisy_crowd    0.5016 0.0013  0.1245  0.8787    True         0.045094                          True

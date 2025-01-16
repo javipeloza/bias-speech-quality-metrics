@@ -1,0 +1,32 @@
+Mann-Whitney U Test for Language Bias (PESQ and ViSQOL Scores)
+=============================================================
+Language: english
+PESQ Scores:
+  U-statistic: 454678.0000
+  P-value: 0.8018
+  Conclusion: No significant bias detected.
+ViSQOL Scores:
+  U-statistic: 480703.0000
+  P-value: 0.0179
+  Conclusion: Significant bias detected.
+-------------------------------------------------------------
+Language: korean
+PESQ Scores:
+  U-statistic: 457872.0000
+  P-value: 0.6098
+  Conclusion: No significant bias detected.
+ViSQOL Scores:
+  U-statistic: 441705.0000
+  P-value: 0.4219
+  Conclusion: No significant bias detected.
+-------------------------------------------------------------
+Language: turkish
+PESQ Scores:
+  U-statistic: 442202.0000
+  P-value: 0.4464
+  Conclusion: No significant bias detected.
+ViSQOL Scores:
+  U-statistic: 432344.0000
+  P-value: 0.1177
+  Conclusion: No significant bias detected.
+-------------------------------------------------------------

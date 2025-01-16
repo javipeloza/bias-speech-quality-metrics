@@ -1,0 +1,11 @@
+Three-Way ANOVA Results (Language, Noise Type, Gender)
+======================================================
+                                           df    sum_sq  mean_sq       F  PR(>F)
+C(Language)                            2.0000    5.2414   2.6207  1.5822  0.2058
+C(Noise_Type)                          2.0000  139.7702  69.8851 42.1920  0.0000
+C(Gender)                              1.0000    1.6641   1.6641  1.0047  0.3163
+C(Language):C(Noise_Type)              4.0000    0.0272   0.0068  0.0041  1.0000
+C(Language):C(Gender)                  2.0000    3.8146   1.9073  1.1515  0.3164
+C(Noise_Type):C(Gender)                2.0000    0.4479   0.2239  0.1352  0.8735
+C(Language):C(Noise_Type):C(Gender)    4.0000    0.1799   0.0450  0.0272  0.9986
+Residual                            1998.0000 3309.4061   1.6564     NaN     NaN

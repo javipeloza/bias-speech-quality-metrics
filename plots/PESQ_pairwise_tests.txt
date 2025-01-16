@@ -1,17 +1,11 @@
 Pairwise T-test for PESQ Scores
 ==================================================
 English vs Turkish:
-Statistic: -0.0968, p-value: 9.2315e-01
+Statistic: -0.1074, p-value: 9.1473e-01
 
 English vs Korean:
-Statistic: 0.4886, p-value: 6.2651e-01
-
-English vs Chinese:
-Statistic: -0.1085, p-value: 9.1385e-01
-
-English vs Spanish:
-Statistic: -0.0023, p-value: 9.9819e-01
+Statistic: 0.4872, p-value: 6.2745e-01
 
 Turkish vs Korean:
-Statistic: 0.6093, p-value: 5.4412e-01
+Statistic: 0.6174, p-value: 5.3872e-01
 

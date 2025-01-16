@@ -1,17 +1,11 @@
 Pairwise T-test for ViSQOL Scores
 ==================================================
 English vs Turkish:
-Statistic: -0.7862, p-value: 4.3421e-01
+Statistic: -0.6532, p-value: 5.1545e-01
 
 English vs Korean:
-Statistic: -0.1720, p-value: 8.6391e-01
-
-English vs Chinese:
-Statistic: 0.0537, p-value: 9.5731e-01
-
-English vs Spanish:
-Statistic: -0.0883, p-value: 9.2986e-01
+Statistic: -0.1636, p-value: 8.7043e-01
 
 Turkish vs Korean:
-Statistic: 0.6046, p-value: 5.4725e-01
+Statistic: 0.4855, p-value: 6.2859e-01
 

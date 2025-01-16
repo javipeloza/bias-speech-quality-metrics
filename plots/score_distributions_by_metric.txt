@@ -1,0 +1,3 @@
+Metric	Min	Q1	Median	Q3	Max	Mean
+PESQ	1.07	1.29	1.95	3.69	4.18	2.38
+ViSQOL	1.00	1.81	3.45	4.30	4.59	3.02

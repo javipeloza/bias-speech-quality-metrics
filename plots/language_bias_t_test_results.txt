@@ -1,0 +1,32 @@
+T-Test for Language Bias (PESQ and ViSQOL Scores)
+=================================================
+Language: english
+PESQ Scores:
+  T-statistic: 0.0999
+  P-value: 0.9204
+  Conclusion: No significant bias detected.
+ViSQOL Scores:
+  T-statistic: 1.7069
+  P-value: 0.0881
+  Conclusion: No significant bias detected.
+-------------------------------------------------
+Language: korean
+PESQ Scores:
+  T-statistic: 0.2764
+  P-value: 0.7823
+  Conclusion: No significant bias detected.
+ViSQOL Scores:
+  T-statistic: -0.5492
+  P-value: 0.5829
+  Conclusion: No significant bias detected.
+-------------------------------------------------
+Language: turkish
+PESQ Scores:
+  T-statistic: -0.3782
+  P-value: 0.7054
+  Conclusion: No significant bias detected.
+ViSQOL Scores:
+  T-statistic: -1.1655
+  P-value: 0.2440
+  Conclusion: No significant bias detected.
+-------------------------------------------------

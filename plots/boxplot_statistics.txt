@@ -1,0 +1,7 @@
+Language	Metric	Min	Q1	Median	Q3	Max	Mean
+English	PESQ	1.14	1.31	1.91	3.81	4.18	2.41
+Korean	PESQ	1.07	1.27	1.89	3.63	4.03	2.29
+Turkish	PESQ	1.22	1.36	2.09	3.73	3.99	2.44
+English	ViSQOL	1.00	1.81	3.27	4.18	4.46	2.94
+Korean	ViSQOL	1.00	1.75	3.33	4.29	4.54	2.99
+Turkish	ViSQOL	1.00	1.86	3.60	4.47	4.59	3.13
