@@ -28,6 +28,33 @@ Below are the key visualizations from the experiment:
   <img src="plots/metric_correlation_by_gender.png" alt="Metric Correlation by Gender" width="45%">
 </div>
 
+#### Kolmogorov-Smirnov (KS) Test Results by Language
+| Metric  | Comparison          | KS-statistic | p-value |
+|---------|---------------------|--------------|---------|
+| **PESQ**   | English vs Korean  | 0.17        | 0.61    |
+|           | English vs Turkish | 0.20        | 0.44    |
+|           | Korean vs Turkish  | 0.21        | 0.29    |
+| **ViSQOL** | English vs Korean  | 0.14        | 0.79    |
+|           | English vs Turkish | 0.33        | **0.02** |
+|           | Korean vs Turkish  | 0.23        | 0.18    |
+
+#### Kolmogorov-Smirnov (KS) Test Results by Degradation Type
+| Metric  | Comparison           | KS-statistic | p-value |
+|---------|----------------------|--------------|---------|
+| **PESQ**   | Blue vs Pink Noise   | 0.12        | 0.93    |
+|           | Blue vs Babble Noise | 0.17        | 0.61    |
+|           | Pink vs Babble Noise | 0.19        | 0.44    |
+| **ViSQOL** | Blue vs Pink Noise   | 0.10        | 0.99    |
+|           | Blue vs Babble Noise | 0.31        | **0.04** |
+|           | Pink vs Babble Noise | 0.29        | 0.06    |
+
+#### Statistical Metrics for PESQ and ViSQOL Score Correlation
+| Metric            | Overall | Non-TM | TM   | Diff  |
+|------------------|---------|--------|------|-------|
+| **MAD**          | 0.71    | 0.73   | 0.62 | -0.11 |
+| **RMSD**         | 0.89    | 0.91   | 0.77 | -0.13 |
+| **Mean difference** | -0.62   | -0.65  | -0.47 | 0.18  |
+
 These plots provide insights into the relationships between different metrics, score distributions, noise type effects, and how SNR affects PESQ and ViSQOL scores.
 
 
