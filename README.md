@@ -11,19 +11,19 @@ Abstract:
 Below are the key visualizations from the experiment:
 
 #### Average PESQ and ViSQOL Scores by Language
-<div style="display: flex; justify-content: center; gap: 10px;">  
+<div style="display: flex; justify-content: center; gap: 0px;">  
   <img src="plots/average_pesq_visqol_by_snr.png" alt="Average PESQ and ViSQOL by SNR" width="45%">
   <img src="plots/score_distributions.png" alt="Score Distributions" width="45%">
 </div>
 
 #### Score Density Violin Plot & Density Distributions
-<div style="display: flex; justify-content: center; gap: 10px;">    
+<div style="display: flex; justify-content: center; gap: 0px;">    
   <img src="plots/score_density_violin.png" alt="Score Density Violin Plot" width="50%">
   <img src="plots/score_density_distributions.png" alt="Score Density Distributions" width="50%">
 </div>
 
 #### Scores by Degradation Type & Correlation by Gender
-<div style="display: flex; justify-content: center; gap: 10px;">
+<div style="display: flex; justify-content: center; gap: 0px;">
   <img src="plots/metrics_by_noise_type.png" alt="Metrics By Noise Type" width="50%">
   <img src="plots/metric_correlation_by_gender.png" alt="Metric Correlation by Gender" width="50%">
 </div>
