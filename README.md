@@ -18,14 +18,14 @@ Below are the key visualizations from the experiment:
 
 #### Score Density Violin Plot & Density Distributions
 <div style="display: flex; justify-content: center; gap: 0px;">    
-  <img src="plots/score_density_violin.png" alt="Score Density Violin Plot" width="50%">
-  <img src="plots/score_density_distributions.png" alt="Score Density Distributions" width="50%">
+  <img src="plots/score_density_violin.png" alt="Score Density Violin Plot" width="45%">
+  <img src="plots/score_density_distributions.png" alt="Score Density Distributions" width="45%">
 </div>
 
 #### Scores by Degradation Type & Correlation by Gender
 <div style="display: flex; justify-content: center; gap: 0px;">
-  <img src="plots/metrics_by_noise_type.png" alt="Metrics By Noise Type" width="50%">
-  <img src="plots/metric_correlation_by_gender.png" alt="Metric Correlation by Gender" width="50%">
+  <img src="plots/metrics_by_noise_type.png" alt="Metrics By Noise Type" width="45%">
+  <img src="plots/metric_correlation_by_gender.png" alt="Metric Correlation by Gender" width="45%">
 </div>
 
 These plots provide insights into the relationships between different metrics, score distributions, noise type effects, and how SNR affects PESQ and ViSQOL scores.
