@@ -69,8 +69,7 @@ To install the required packages, follow these steps:
    ```bash
    pip install -r requirements.txt
    
-4. Install the MATLAB Engine for Python by following the instructions [here](https://www.mathworks.com/help/matlab/matlab_external/install-the-matlab-engine-for-python.html).
-5. Install [Audio Toolbox](https://mathworks.com/products/audio.html) in MATLAB, as it is required for audio processing.
+4. Install [Audio Toolbox](https://mathworks.com/products/audio.html) in MATLAB, as it is required for audio processing.
 
 ## Running the Experiment and Plotting Results 
 
