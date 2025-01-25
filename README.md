@@ -12,8 +12,8 @@ Below are the key visualizations from the experiment:
 
 #### Average PESQ and ViSQOL Scores by Language
 <div style="display: flex; justify-content: center; gap: 10px;">  
-  <img src="plots/average_pesq_visqol_by_snr.png" alt="Average PESQ and ViSQOL by SNR" width="50%">
-  <img src="plots/score_distributions.png" alt="Score Distributions" width="50%">
+  <img src="plots/average_pesq_visqol_by_snr.png" alt="Average PESQ and ViSQOL by SNR" width="45%">
+  <img src="plots/score_distributions.png" alt="Score Distributions" width="45%">
 </div>
 
 #### Score Density Violin Plot & Density Distributions
