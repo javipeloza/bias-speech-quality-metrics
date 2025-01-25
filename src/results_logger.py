@@ -497,6 +497,7 @@ def plot_average_scores_by_degradation_type(data, output_dir='plots'):
 
     # Save the plot
     output_path = os.path.join(output_dir, 'metrics_by_noise_type.svg')
+    output_path = os.path.join(output_dir, 'metrics_by_noise_type.png')
     plt.tight_layout()
     plt.savefig(output_path, bbox_inches='tight')
     plt.close()

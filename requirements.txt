@@ -1,0 +1,13 @@
+librosa==0.10.2.post1
+matlab==0.1
+matlabengine==24.2
+matplotlib==3.10.0
+numpy==2.2.2
+pandas==2.2.3
+pesq==0.0.4
+pydub==0.25.1
+scikit_learn==1.6.1
+scipy==1.15.1
+seaborn==0.13.2
+statsmodels==0.14.4
+webrtcvad==2.0.10

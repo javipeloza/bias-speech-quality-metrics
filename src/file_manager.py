@@ -124,7 +124,6 @@ def extract_sentences_from_audio(min_silence_len=1000, silence_thresh=-60, min_l
                 else:
                     print(f"Skipped chunk {i + 1} from {filename} (length: {chunk_length / 1000} seconds)")
 
-
 def calculate_speech_activity(audio_file, sample_rate=16000, frame_duration_ms=30):
     """
     Calculate the speech activity percentage in an audio file.
