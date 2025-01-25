@@ -66,7 +66,6 @@ Please cite this repository if it was useful for your research:
 ```bibtex
 @article{javipeloza2025speechqualitybias,
   title={Performance of Objective Speech Quality Metrics on Languages Beyond Validation Data: A Study of Turkish and Korean},
-  subtitle={},
   author={Pérez López, Javier},
   year={2025},
   school={Delft University of Technology},
