@@ -1,0 +1,8 @@
+Overall Metrics (Across All Datasets):
+MAE: 0.7109
+RMSE: 0.8866
+Standard Deviation: 0.6306
+Pearson Correlation Coefficient: 0.8765
+Mean Absolute Deviation (MAD): 0.7109
+Root Mean Squared Deviation (RMSD): 0.8866
+Bias (Mean Difference PESQ - ViSQOL): -0.6232

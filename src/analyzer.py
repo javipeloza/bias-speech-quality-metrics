@@ -8,7 +8,6 @@ class AudioQualityAnalyzer:
         self.ref_dir = ref_dir
         self.deg_dir = deg_dir
         self.degradation_levels = list(np.arange(-25, 41, 5))
-        # self.degradation_levels = [-20,0]
 
         """
             results: {
@@ -83,33 +82,6 @@ class AudioQualityAnalyzer:
                 print(f"Skipping file {file_name}: {str(e)}")
                 self.skipped_files.append(file_name)
                 continue
-
-    def get_results_by_file(self, file_name, degradation_type=None, metric_name=None):
-        """
-        Get results for a specific file, optionally filtered by degradation type and metric
-        Returns: (levels, scores)
-        """
-        if file_name not in self.results:
-            return None, None
-            
-        if degradation_type is None:
-            return self.results[file_name]
-            
-        if degradation_type not in self.results[file_name]:
-            return None, None
-            
-        if metric_name is None:
-            return self.results[file_name][degradation_type]
-            
-        levels = sorted(self.results[file_name][degradation_type].keys())
-        scores = [
-            self.results[file_name][degradation_type][level][metric_name] 
-            for level in levels
-            if level in self.results[file_name][degradation_type] 
-            and self.results[file_name][degradation_type][level] is not None
-            and metric_name in self.results[file_name][degradation_type][level]
-        ]
-        return levels, scores
 
     def get_average_scores(self, degradation_type, metric_name):
         """Get average scores across all files for a specific degradation type and metric"""

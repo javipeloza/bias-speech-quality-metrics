@@ -55,36 +55,31 @@ def adjust_noise_volume_snr(noise, signal, target_snr_db):
     # Get the signal and noise powers
     signal_rms = signal.rms
     noise_rms = noise.rms
-
-    # print(f"Signal RMS: {signal_rms}")
-    # print(f"Signal dBFS: {signal.dBFS}")
-    # print(f"Signal Max dBFS: {signal.max_dBFS}")
-    # print(f"Noise RMS: {noise_rms}")
-    # print(f"Noise dBFS: {noise.dBFS}")
-    # print(f"Noise Max dBFS: {noise.max_dBFS}")
     
     # Calculate the gain needed for desired SNR
     # SNR = 20 * log10(signal_rms / noise_rms_desired)
     # Therefore: noise_rms_desired = signal_rms / (10^(SNR/20))
     desired_noise_rms = signal_rms / (10 ** (target_snr_db / 20))
 
-    # print(f"Desired Noise RMS: {desired_noise_rms}")
-
     # Calculate required gain
     gain_db = 20 * np.log10(desired_noise_rms / noise_rms)
-
-    # print(f"Gain (dB): {gain_db}")
 
     # Apply gain to noise
     adjusted_noise = noise.apply_gain(gain_db)
 
-    # print(f"Adjusted Noise RMS: {adjusted_noise.rms}")
-    # print(f"Adjusted Noise dBFS: {adjusted_noise.dBFS}")
-    # print(f"Adjusted Noise Max dBFS: {adjusted_noise.max_dBFS}")
-
     return adjusted_noise
 
 def resample_signal(signal_path, sampling_rate=8000):
+    """
+    Resamples an audio signal to the specified sampling rate.
+
+    Args:
+        signal_path (str): Path to the input audio file.
+        sampling_rate (int, optional): Target sampling rate in Hz. Default is 8000 Hz.
+
+    Returns:
+        AudioSegment: The resampled audio signal.
+    """
     signal = AudioSegment.from_file(signal_path)
     signal.set_frame_rate(sampling_rate)
 
@@ -110,6 +105,17 @@ def simulate_narrowband(signal, sampling_rate=8000):
     return signal
 
 def overlay_signal(signal, snr, noise_file_path):
+    """
+    Overlays a noise signal onto the input audio signal at a specified SNR (Signal-to-Noise Ratio).
+
+    Args:
+        signal: The input audio signal (AudioSegment).
+        snr: Desired Signal-to-Noise Ratio in dB.
+        noise_file_path: Path to the noise audio file.
+
+    Returns:
+        AudioSegment: The noisy audio signal with overlaid noise.
+    """
     noise = AudioSegment.from_file(noise_file_path)
     # Loop noise if needed to match signal length
     noise = (noise * (len(signal) // len(noise) + 1))[:len(signal)]
@@ -122,6 +128,16 @@ def overlay_signal(signal, snr, noise_file_path):
     return signal.overlay(noise)
 
 def export_file(signal, path):
+    """
+    Exports an audio signal to a WAV file with preserved sample rate, mono channel, and 16-bit sample format.
+
+    Args:  
+        signal: input audio signal (AudioSegment).  
+        path: destination file path for the exported audio.  
+
+    Returns:  
+        The path of the exported file.  
+    """
     signal.export(
         path, 
         format="wav",

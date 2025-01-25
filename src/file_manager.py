@@ -8,22 +8,82 @@ import librosa
 import webrtcvad
 import numpy as np
 import re
+import json
 
-class FileManager:
-    @staticmethod
-    def clean_directory(directory):
-        # Clean all files in the specified directory
-        for filename in os.listdir(directory):
-            file_path = os.path.join(directory, filename)
-            try:
-                if os.path.isfile(file_path) or os.path.islink(file_path):
-                    os.unlink(file_path)
-                elif os.path.isdir(file_path):
-                    shutil.rmtree(file_path)
-            except Exception as e:
-                print(f'Failed to delete {file_path}. Reason: {e}')
 
-def extract_sentences_from_audio(): 
+def clean_directory(directory_path):
+    """
+    Removes all files and subdirectories within the specified directory.
+
+    Args:  
+        directory_path is the path to the directory to be cleaned.  
+    """
+    # Clean all files in the specified directory
+    for filename in os.listdir(directory_path):
+        file_path = os.path.join(directory_path, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            print(f'Failed to delete {file_path}. Reason: {e}')
+
+def extract_json_data(file_path):
+    """
+    Extracts and returns the JSON data from a specified file path
+    
+    Args:
+        file_path (str): Path to the JSON file to be read
+        
+    Returns:
+        dict: The parsed JSON data from the file
+    """
+    try:
+        with open(file_path, 'r') as file:
+            data = json.load(file)
+        return data
+    except FileNotFoundError:
+        print(f"Error: Could not find {file_path}")
+        return None
+    except json.JSONDecodeError:
+        print(f"Error: Invalid JSON format in {file_path}")
+        return None
+
+def load_and_convert_json_results_by_gender(file_name):
+    results_path = os.path.join("results", file_name)
+    
+    with open(results_path, "r", encoding="utf-8") as file:
+        data = json.load(file)
+    
+    def convert_to_tuples(nested_list):
+        return [tuple(item) for item in nested_list]
+    
+    dataset = {
+        "English Female": convert_to_tuples(data.get("english", {}).get("female", [])),
+        "English Male": convert_to_tuples(data.get("english", {}).get("male", [])),
+        "Turkish Female": convert_to_tuples(data.get("turkish", {}).get("female", [])),
+        "Turkish Male": convert_to_tuples(data.get("turkish", {}).get("male", [])),  # Reference group
+        "Korean Female": convert_to_tuples(data.get("korean", {}).get("female", [])),
+        "Korean Male": convert_to_tuples(data.get("korean", {}).get("male", []))
+    }
+    
+    return dataset
+
+def extract_sentences_from_audio(min_silence_len=1000, silence_thresh=-60, min_length=4000, max_length=20000):
+    """
+    Splits `.wav` files in a selected folder into smaller chunks based on silence and 
+    saves valid segments (between `min_length` and `max_length` ms) in a `separated_sentences` subfolder.
+
+    Args:
+        min_silence_len (int): Minimum silence duration (ms) to split audio.
+        silence_thresh (int): Silence threshold (dBFS) for detecting pauses.
+        min_length (int): Minimum allowed chunk duration (ms).
+        max_length (int): Maximum allowed chunk duration (ms).
+
+    Returns:
+        None
+    """
     # Initialize tkinter and get folder selection
     root = tk.Tk()
     root.withdraw()
@@ -46,8 +106,8 @@ def extract_sentences_from_audio():
             # Split the audio based on silence
             chunks = split_on_silence(
                 audio,
-                min_silence_len=1000,  # Minimum length of silence (in ms) to consider as a separator
-                silence_thresh=-60  # Silence threshold (in dBFS)
+                min_silence_len,  # Minimum length of silence (in ms) to consider as a separator
+                silence_thresh  # Silence threshold (in dBFS)
             )
 
             # Create a folder for the current audio file's subsentences
@@ -57,12 +117,13 @@ def extract_sentences_from_audio():
             # Export each chunk as a separate audio file in the new directory
             for i, chunk in enumerate(chunks):
                 chunk_length = len(chunk)  # Get the length of the chunk in milliseconds
-                if 4000 <= chunk_length <= 20000:  # Check if the chunk is between 4 and 20 seconds long
+                if min_length <= chunk_length <= max_length:  # Check if the chunk is between 4 and 20 seconds long
                     output_path = os.path.join(file_output_dir, f"{os.path.splitext(filename)[0]}_{i + 1}.wav")  # Update path to include the new directory and naming convention
                     chunk.export(output_path, format="wav")
                     print(f"Exported: {output_path}")
                 else:
                     print(f"Skipped chunk {i + 1} from {filename} (length: {chunk_length / 1000} seconds)")
+
 
 def calculate_speech_activity(audio_file, sample_rate=16000, frame_duration_ms=30):
     """
@@ -130,15 +191,17 @@ def calculate_speech_activity_in_folder(folder_path):
         print(f"{audio_file}: {percentage:.2f}% speech activity\n")
 
     # Calculate the average speech activity
-    # Spanish: 98.04%
 	# Turkish: 97.27%
 	# Korean: 98.66%
 	# English: 97.67%
-	# Chinese: 95.31%
     average_speech_activity = total_speech_activity / len(audio_files) if audio_files else 0
     return speech_activity, average_speech_activity
 
 def fix_txt_files_to_json():
+    """
+        Utility function that was created to extract the experiment results 
+        to json format, due to a bug during saving the experiment results to json
+    """
     # Initialize tkinter and get folder selection
     root = tk.Tk()
     root.withdraw()

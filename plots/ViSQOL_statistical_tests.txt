@@ -1,7 +1,0 @@
-Statistical Tests for ViSQOL Scores
-========================================
-ANOVA Test:
-F-statistic: 0.2337, p-value: 7.9193e-01
-
-Kruskal-Wallis Test:
-H-statistic: 2.4111, p-value: 2.9953e-01
