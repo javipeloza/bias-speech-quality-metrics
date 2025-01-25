@@ -27,6 +27,9 @@ if __name__ == '__main__':
         deg_dir = os.path.join(audio_dir, 'degraded', language)
         temp_ref_dir = os.path.join(ref_dir, 'temp_ref')
 
+        # Ensure the degraded directory exists
+        os.makedirs(deg_dir, exist_ok=True)
+
         # Clean all files in the degraded directory
         clean_directory(deg_dir)
 

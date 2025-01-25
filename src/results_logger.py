@@ -11,7 +11,7 @@ import matplotlib.lines as mlines
 import pandas as pd
 
 noise_types = ['blue_noise', 'pink_noise', 'noisy_crowd']
-snr_levels = range(-25, 41, 5)
+snr_levels = [str(x) for x in np.arange(-25, 41, 5)]
 
 # ----------------------- Saving results -----------------------------------------------------
 

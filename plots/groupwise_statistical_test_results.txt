@@ -3,21 +3,25 @@ Groupwise Statistical Tests Results
 
 ANOVA Results
 ======================================================================
-Not enough data for statistical testing.
+PESQ:
+Statistic: 0.21, p-value: 0.81
 ----------------------------------------------------------------------
 
 ANOVA Results
 ======================================================================
-Not enough data for statistical testing.
+ViSQOL:
+Statistic: 0.23, p-value: 0.79
 ----------------------------------------------------------------------
 
 Kruskal-Wallis Test Results
 ======================================================================
-Not enough data for statistical testing.
+PESQ:
+Statistic: 1.23, p-value: 0.54
 ----------------------------------------------------------------------
 
 Kruskal-Wallis Test Results
 ======================================================================
-Not enough data for statistical testing.
+ViSQOL:
+Statistic: 2.41, p-value: 0.30
 ----------------------------------------------------------------------
 

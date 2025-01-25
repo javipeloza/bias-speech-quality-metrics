@@ -11,7 +11,7 @@ from statsmodels.stats.anova import anova_lm
 import json
 
 noise_types = ['blue_noise', 'pink_noise', 'noisy_crowd']
-snr_levels = range(-25, 41, 5)
+snr_levels = [str(x) for x in np.arange(-25, 41, 5)]
 
 def compute_score_differences_for_languages(data, lang1, lang2):
     """
@@ -361,9 +361,6 @@ def perform_pairwise_statistical_tests(data, output_dir='plots'):
         perform_tests(pesq_scores_by_language, "PESQ", "Wilcoxon Rank Sum Test", lambda x, y: ranksums(x, y, alternative='two-sided'))
         perform_tests(visqol_scores_by_language, "ViSQOL", "Wilcoxon Rank Sum Test", lambda x, y: ranksums(x, y, alternative='two-sided'))
 
-        perform_tests(pesq_scores_by_language, "PESQ", "Wilcoxon Signed Rank Test (INCORRECT IMPLEMENTATION)", lambda x, y: wilcoxon(x, y, alternative='two-sided'))
-        perform_tests(visqol_scores_by_language, "ViSQOL", "Wilcoxon Signed Rank Test (INCORRECT IMPLEMENTATION)", lambda x, y: wilcoxon(x, y, alternative='two-sided'))
-
         perform_tests(pesq_scores_by_language, "PESQ", "Spearman Rank Correlation", lambda x, y: spearmanr(x, y))
         perform_tests(visqol_scores_by_language, "ViSQOL", "Spearman Rank Correlation", lambda x, y: spearmanr(x, y))
 
@@ -473,9 +470,6 @@ def perform_pairwise_statistical_tests_by_noise(data, output_dir='plots'):
         
         perform_tests(pesq_scores_by_noise_type, "PESQ", "Wilcoxon Rank Sum Test", lambda x, y: ranksums(x, y, alternative='two-sided'))
         perform_tests(visqol_scores_by_noise_type, "ViSQOL", "Wilcoxon Rank Sum Test", lambda x, y: ranksums(x, y, alternative='two-sided'))
-
-        perform_tests(pesq_scores_by_noise_type, "PESQ", "Wilcoxon Signed Rank Test (INCORRECT IMPLEMENTATION)", lambda x, y: wilcoxon(x, y, alternative='two-sided'))
-        perform_tests(visqol_scores_by_noise_type, "ViSQOL", "Wilcoxon Signed Rank Test (INCORRECT IMPLEMENTATION)", lambda x, y: wilcoxon(x, y, alternative='two-sided'))
 
         perform_tests(pesq_scores_by_noise_type, "PESQ", "Spearman Rank Correlation", lambda x, y: spearmanr(x, y))
         perform_tests(visqol_scores_by_noise_type, "ViSQOL", "Spearman Rank Correlation", lambda x, y: spearmanr(x, y))
