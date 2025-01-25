@@ -6,6 +6,31 @@ Abstract:
 
 > This study investigates the performance of two objective speech quality metrics, Perceptual Evaluation of Speech Quality (PESQ) and Virtual Speech Quality Objective Listener (ViSQOL), in predicting human-rated speech quality scores, which are essential for telecommunication systems' Quality of Experience (QoE). These metrics have been validated using a limited number of languages due to the insufficiency of labeled data with human-rated scores. This research focuses on the applicability of PESQ and ViSQOL on Turkish and Korean, two languages that were not part of the validation data for calibrating these metrics. The experiment used English as the baseline language for comparison, and the results showed that Turkish samples had higher average ViSQOL scores, with the difference being statistically significant compared to the English samples. Furthermore, Turkish male speakers had the highest correlation between PESQ and ViSQOL scores, and ViSQOL rated speech higher than PESQ, especially under babble noise degradations. Future work should focus on exploring biases across additional metrics, languages, gender, and degradation conditions.
 
+## Results
+
+Below are the key visualizations from the experiment:
+
+<!-- ### Average PESQ and ViSQOL by SNR -->
+![Average PESQ and ViSQOL by SNR](plots/average_pesq_visqol_by_snr.png)
+
+<!-- ### Score Distributions -->
+![Score Distributions](plots/score_distributions.png)
+
+<!-- ### Score Density Violin Plot -->
+![Score Density Violin Plot](plots/score_density_violin.png)
+
+<!-- ### Score Density Distributions -->
+![Score Density Distributions](plots/score_density_distributions.png)
+
+<!-- ### Metrics By Noise Type -->
+![Metrics By Noise Type](plots/metrics_by_noise_type.png)
+
+<!-- ### Metric Correlation by Gender -->
+![Metric Correlation by Gender](plots/metric_correlation_by_gender.png)
+
+These visualizations provide insights into the relationships between different metrics, score distributions, and how language, gender, degradation type affects PESQ and ViSQOL scores. 
+
+
 ## Installation
 
 To install the required packages, follow these steps:
@@ -20,9 +45,19 @@ To install the required packages, follow these steps:
 4. Install the MATLAB Engine for Python by following the instructions [here](https://www.mathworks.com/help/matlab/matlab_external/install-the-matlab-engine-for-python.html).
 5. Install [Audio Toolbox](https://mathworks.com/products/audio.html) in MATLAB, as it is required for audio processing.
 
-## Usage
+## Running the Experiment and Plotting Results 
 
-TODO
+To run the experiment, execute the following command:
+
+  ```bash
+  python main.py
+  ```
+
+To plot your results and perform statistical analysis, exectute the following command:
+
+  ```bash
+  python results_extractor.py
+  ```
 
 ## Citation (BibTeX)
 
