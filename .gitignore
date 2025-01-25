@@ -1,5 +1,12 @@
 # Ignore the audio folder
-/audio/
+/audio/other
+/audio/degraded
+/audio/reference/backup
+/audio/reference/chinese
+/audio/reference/spanish
+/audio/reference/turkish/extra
+/audio/reference/english/extra
+/audio/reference/korean/extra
 
 # Ignore the __pycache__ folder
 /__pycache__/
