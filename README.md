@@ -28,25 +28,106 @@ Below are the key visualizations from the experiment:
   <img src="plots/metric_correlation_by_gender.png" alt="Metric Correlation by Gender" width="45%">
 </div>
 
-#### Kolmogorov-Smirnov (KS) Test Results by Language
-| Metric  | Comparison          | KS-statistic | p-value |
-|---------|---------------------|--------------|---------|
-| **PESQ**   | English vs Korean  | 0.17        | 0.61    |
-|           | English vs Turkish | 0.20        | 0.44    |
-|           | Korean vs Turkish  | 0.21        | 0.29    |
-| **ViSQOL** | English vs Korean  | 0.14        | 0.79    |
-|           | English vs Turkish | 0.33        | **0.02** |
-|           | Korean vs Turkish  | 0.23        | 0.18    |
+#### Kolmogorov-Smirnov (KS) Test Results
 
-#### Kolmogorov-Smirnov (KS) Test Results by Degradation Type
-| Metric  | Comparison           | KS-statistic | p-value |
-|---------|----------------------|--------------|---------|
-| **PESQ**   | Blue vs Pink Noise   | 0.12        | 0.93    |
-|           | Blue vs Babble Noise | 0.17        | 0.61    |
-|           | Pink vs Babble Noise | 0.19        | 0.44    |
-| **ViSQOL** | Blue vs Pink Noise   | 0.10        | 0.99    |
-|           | Blue vs Babble Noise | 0.31        | **0.04** |
-|           | Pink vs Babble Noise | 0.29        | 0.06    |
+<div style="display: flex; justify-content: space-between; gap: 20px;">
+  <div>
+    <h4>By Language</h4>
+    <table>
+      <tr>
+        <th>Metric</th>
+        <th>Comparison</th>
+        <th>KS-statistic</th>
+        <th>p-value</th>
+      </tr>
+      <tr>
+        <td><strong>PESQ</strong></td>
+        <td>English vs Korean</td>
+        <td>0.17</td>
+        <td>0.61</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>English vs Turkish</td>
+        <td>0.20</td>
+        <td>0.44</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Korean vs Turkish</td>
+        <td>0.21</td>
+        <td>0.29</td>
+      </tr>
+      <tr>
+        <td><strong>ViSQOL</strong></td>
+        <td>English vs Korean</td>
+        <td>0.14</td>
+        <td>0.79</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>English vs Turkish</td>
+        <td>0.33</td>
+        <td><strong>0.02</strong></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Korean vs Turkish</td>
+        <td>0.23</td>
+        <td>0.18</td>
+      </tr>
+    </table>
+  </div>
+
+  <div>
+    <h4>By Degradation Type</h4>
+    <table>
+      <tr>
+        <th>Metric</th>
+        <th>Comparison</th>
+        <th>KS-statistic</th>
+        <th>p-value</th>
+      </tr>
+      <tr>
+        <td><strong>PESQ</strong></td>
+        <td>Blue vs Pink Noise</td>
+        <td>0.12</td>
+        <td>0.93</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Blue vs Babble Noise</td>
+        <td>0.17</td>
+        <td>0.61</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Pink vs Babble Noise</td>
+        <td>0.19</td>
+        <td>0.44</td>
+      </tr>
+      <tr>
+        <td><strong>ViSQOL</strong></td>
+        <td>Blue vs Pink Noise</td>
+        <td>0.10</td>
+        <td>0.99</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Blue vs Babble Noise</td>
+        <td>0.31</td>
+        <td><strong>0.04</strong></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Pink vs Babble Noise</td>
+        <td>0.29</td>
+        <td>0.06</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
 
 #### Statistical Metrics for PESQ and ViSQOL Score Correlation
 | Metric            | Overall | Non-Turkish Male | Turkish Male   | Diff  |
@@ -85,6 +166,8 @@ To plot your results and perform statistical analysis, exectute the following co
   ```bash
   python results_extractor.py
   ```
+
+Note that to plot the results, it is necessary to have an `analysis_results.json` file in the same format as the one included in this repository, which is not generated automatically by the `main.py` file. To generate this file, run `fix_txt_files_to_json` in `file_manager.py` inside each of the individual language results txt file. Then, extract the `results` component and save it to `analysis_results.json`.
 
 ## Citation (BibTeX)
 
