@@ -49,7 +49,7 @@ Below are the key visualizations from the experiment:
 |           | Pink vs Babble Noise | 0.29        | 0.06    |
 
 #### Statistical Metrics for PESQ and ViSQOL Score Correlation
-| Metric            | Overall | Non-TM | TM   | Diff  |
+| Metric            | Overall | Non-Turkish Male | Turkish Male   | Diff  |
 |------------------|---------|--------|------|-------|
 | **MAD**          | 0.71    | 0.73   | 0.62 | -0.11 |
 | **RMSD**         | 0.89    | 0.91   | 0.77 | -0.13 |
