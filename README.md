@@ -10,25 +10,25 @@ Abstract:
 
 Below are the key visualizations from the experiment:
 
-<!-- ### Average PESQ and ViSQOL by SNR -->
-![Average PESQ and ViSQOL by SNR](plots/average_pesq_visqol_by_snr.png)
+#### Average PESQ and ViSQOL Scores by Language
+<div style="display: flex; justify-content: space-around;">
+  <img src="plots/average_pesq_visqol_by_snr.png" alt="Average PESQ and ViSQOL by SNR" width="45%">
+  <img src="plots/score_distributions.png" alt="Score Distributions" width="45%">
+</div>
 
-<!-- ### Score Distributions -->
-![Score Distributions](plots/score_distributions.png)
+#### Score Density Violin Plot & Density Distributions
+<div style="display: flex; justify-content: space-around;">
+  <img src="plots/score_density_violin.png" alt="Score Density Violin Plot" width="45%">
+  <img src="plots/score_density_distributions.png" alt="Score Density Distributions" width="45%">
+</div>
 
-<!-- ### Score Density Violin Plot -->
-![Score Density Violin Plot](plots/score_density_violin.png)
+#### Scores by Degradation Type & Correlation by Gender
+<div style="display: flex; justify-content: space-around;">
+  <img src="plots/metrics_by_noise_type.png" alt="Metrics By Noise Type" width="45%">
+  <img src="plots/metric_correlation_by_gender.png" alt="Metric Correlation by Gender" width="45%">
+</div>
 
-<!-- ### Score Density Distributions -->
-![Score Density Distributions](plots/score_density_distributions.png)
-
-<!-- ### Metrics By Noise Type -->
-![Metrics By Noise Type](plots/metrics_by_noise_type.png)
-
-<!-- ### Metric Correlation by Gender -->
-![Metric Correlation by Gender](plots/metric_correlation_by_gender.png)
-
-These visualizations provide insights into the relationships between different metrics, score distributions, and how language, gender, degradation type affects PESQ and ViSQOL scores. 
+These plots provide insights into the relationships between different metrics, score distributions, noise type effects, and how SNR affects PESQ and ViSQOL scores.
 
 
 ## Installation
