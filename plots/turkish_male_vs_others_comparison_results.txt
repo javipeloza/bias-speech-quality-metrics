@@ -1,0 +1,24 @@
+Turkish Male Metrics:
+MAE: 0.6214
+RMSE: 0.7721
+Standard Deviation: 0.6098
+Pearson Correlation Coefficient: 0.8782
+Mean Absolute Deviation (MAD): 0.6214
+Root Mean Squared Deviation (RMSD): 0.7721
+Bias (Mean Difference PESQ - ViSQOL): -0.4736
+
+Average Metrics for All Datasets Except Turkish Male:
+MAE: 0.7288
+RMSE: 0.9063
+Standard Deviation: 0.6277
+Pearson Correlation Coefficient: 0.8787
+Mean Absolute Deviation (MAD): 0.7288
+Root Mean Squared Deviation (RMSD): 0.9063
+Bias (Mean Difference PESQ - ViSQOL): -0.6531
+
+Comparison of Turkish Male against the average of other datasets:
+Pearson Correlation Difference: -0.0005
+Bias Difference: 0.1795
+RMSE Difference: -0.1342
+MAE Difference: -0.1075
+RMSD Difference: -0.1342

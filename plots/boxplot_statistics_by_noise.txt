@@ -1,0 +1,19 @@
+Noise Type	Language	Metric	Min	Q1	Median	Q3	Max	Mean
+Blue_noise	English	PESQ	1.20	1.28	1.82	3.78	4.18	2.39
+Blue_noise	Korean	PESQ	1.07	1.22	1.75	3.49	3.94	2.25
+Blue_noise	Turkish	PESQ	1.22	1.37	2.01	3.65	3.94	2.40
+Pink_noise	English	PESQ	1.16	1.20	1.84	3.80	4.16	2.38
+Pink_noise	Korean	PESQ	1.09	1.19	1.72	3.53	4.00	2.26
+Pink_noise	Turkish	PESQ	1.22	1.43	2.10	3.69	3.97	2.46
+Noisy_crowd	English	PESQ	1.14	1.58	2.01	3.58	4.06	2.47
+Noisy_crowd	Korean	PESQ	1.19	1.42	1.95	3.49	4.03	2.37
+Noisy_crowd	Turkish	PESQ	1.24	1.35	2.19	3.62	3.99	2.46
+Blue_noise	English	ViSQOL	1.00	1.52	2.68	4.08	4.33	2.69
+Blue_noise	Korean	ViSQOL	1.00	1.59	2.70	4.16	4.37	2.74
+Blue_noise	Turkish	ViSQOL	1.00	1.61	3.13	4.40	4.48	2.92
+Pink_noise	English	ViSQOL	1.00	1.20	3.07	4.15	4.34	2.79
+Pink_noise	Korean	ViSQOL	1.00	1.17	3.06	4.27	4.43	2.81
+Pink_noise	Turkish	ViSQOL	1.00	1.23	3.40	4.46	4.52	2.98
+Noisy_crowd	English	ViSQOL	1.81	2.28	3.79	4.24	4.46	3.35
+Noisy_crowd	Korean	ViSQOL	1.74	2.28	3.91	4.40	4.54	3.42
+Noisy_crowd	Turkish	ViSQOL	1.00	2.47	4.13	4.52	4.59	3.50

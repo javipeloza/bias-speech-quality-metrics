@@ -1,0 +1,24 @@
+ANOVA Analysis Results
+=======================
+
+Average PESQ Scores by Language:
+  english: 2.4137
+  korean: 2.2905
+  turkish: 2.4405
+
+Average ViSQOL Scores by Language:
+  english: 2.9410
+  korean: 2.9877
+  turkish: 3.1331
+
+PESQ ANOVA Results:
+  F-statistic: 0.2073
+  p-value: 0.8130
+  Significance threshold: 0.1
+  Significant: No
+
+ViSQOL ANOVA Results:
+  F-statistic: 2.9322
+  p-value: 0.0570
+  Significance threshold: 0.1
+  Significant: Yes
