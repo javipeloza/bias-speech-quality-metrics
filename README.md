@@ -1,6 +1,6 @@
 # Performance of Objective Speech Quality Metrics on Languages Beyond Validation Data
 
-This repository contains the code for my Bachelor thesis, [_Performance of Objective Speech Quality Metrics on Languages Beyond Validation Data: A Study of Turkish and Korean_](TODO), part of TU Delft (2025).
+This repository contains the code for my Bachelor thesis, [_Performance of Objective Speech Quality Metrics on Languages Beyond Validation Data: A Study of Turkish and Korean_](https://resolver.tudelft.nl/uuid:b07c65cb-a633-4a63-8a7b-95d8ec4b8914), part of TU Delft (2025).
 
 Abstract:
 
@@ -98,6 +98,6 @@ Please cite this repository if it was useful for your research:
   year={2025},
   school={Delft University of Technology},
   type={Bachelor Thesis},
-  url = {},
+  url = {https://resolver.tudelft.nl/uuid:b07c65cb-a633-4a63-8a7b-95d8ec4b8914},
 }
 ```
