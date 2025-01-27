@@ -627,8 +627,8 @@ def plot_score_distribution_boxplots(data, output_dir='plots', txt_filename='box
         # ax2.legend(handles=[mean_line, median_line], loc='upper left', fontsize=14)
 
         # Adjust spacing and set the main title
-        fig.suptitle('Score Distributions Across Languages', fontsize=22)
-        fig.tight_layout(rect=[0, 0, 1, 1])  # Reduced white space under the title
+        # fig.suptitle('Score Distributions Across Languages', fontsize=22)
+        # fig.tight_layout(rect=[0, 0, 1, 1])  # Reduced white space under the title
 
         # Save the plot
         plt.savefig(os.path.join(output_dir, 'score_distributions.png'), bbox_inches='tight', dpi=300)
